@@ -1,0 +1,488 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5CFDCEA221167FC500FD0751 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFDCEA121167FC500FD0751 /* AppDelegate.swift */; };
+		5CFDCEA721167FC500FD0751 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CFDCEA521167FC500FD0751 /* Main.storyboard */; };
+		5CFDCEA921167FC500FD0751 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CFDCEA821167FC500FD0751 /* Assets.xcassets */; };
+		5CFDCEAC21167FC500FD0751 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CFDCEAA21167FC500FD0751 /* LaunchScreen.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5CFDCEB321167FC500FD0751 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5CFDCE9621167FC400FD0751 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5CFDCE9D21167FC400FD0751;
+			remoteInfo = WhatsToday;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		5CFDCE9E21167FC400FD0751 /* WhatsToday.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WhatsToday.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5CFDCEA121167FC500FD0751 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		5CFDCEA621167FC500FD0751 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		5CFDCEA821167FC500FD0751 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5CFDCEAB21167FC500FD0751 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		5CFDCEAD21167FC500FD0751 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5CFDCEB221167FC500FD0751 /* WhatsTodayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WhatsTodayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5CFDCEB821167FC500FD0751 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5CFDCE9B21167FC400FD0751 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5CFDCEAF21167FC500FD0751 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5CFDCE9521167FC400FD0751 = {
+			isa = PBXGroup;
+			children = (
+				5CFDCEA021167FC400FD0751 /* WhatsToday */,
+				5CFDCEB521167FC500FD0751 /* WhatsTodayTests */,
+				5CFDCE9F21167FC400FD0751 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		5CFDCE9F21167FC400FD0751 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5CFDCE9E21167FC400FD0751 /* WhatsToday.app */,
+				5CFDCEB221167FC500FD0751 /* WhatsTodayTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5CFDCEA021167FC400FD0751 /* WhatsToday */ = {
+			isa = PBXGroup;
+			children = (
+				5CFDCEC121167FDB00FD0751 /* CoreApp */,
+				5CFDCEC4211681DE00FD0751 /* Models */,
+				5CFDCEC2211681C800FD0751 /* Controllers */,
+				5CFDCEC3211681D700FD0751 /* Views */,
+			);
+			path = WhatsToday;
+			sourceTree = "<group>";
+		};
+		5CFDCEB521167FC500FD0751 /* WhatsTodayTests */ = {
+			isa = PBXGroup;
+			children = (
+				5CFDCEB821167FC500FD0751 /* Info.plist */,
+			);
+			path = WhatsTodayTests;
+			sourceTree = "<group>";
+		};
+		5CFDCEC121167FDB00FD0751 /* CoreApp */ = {
+			isa = PBXGroup;
+			children = (
+				5CFDCEA121167FC500FD0751 /* AppDelegate.swift */,
+				5CFDCEA521167FC500FD0751 /* Main.storyboard */,
+				5CFDCEA821167FC500FD0751 /* Assets.xcassets */,
+				5CFDCEAA21167FC500FD0751 /* LaunchScreen.storyboard */,
+				5CFDCEAD21167FC500FD0751 /* Info.plist */,
+			);
+			path = CoreApp;
+			sourceTree = "<group>";
+		};
+		5CFDCEC2211681C800FD0751 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		5CFDCEC3211681D700FD0751 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		5CFDCEC4211681DE00FD0751 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5CFDCE9D21167FC400FD0751 /* WhatsToday */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5CFDCEBB21167FC500FD0751 /* Build configuration list for PBXNativeTarget "WhatsToday" */;
+			buildPhases = (
+				5CFDCE9A21167FC400FD0751 /* Sources */,
+				5CFDCE9B21167FC400FD0751 /* Frameworks */,
+				5CFDCE9C21167FC400FD0751 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WhatsToday;
+			productName = WhatsToday;
+			productReference = 5CFDCE9E21167FC400FD0751 /* WhatsToday.app */;
+			productType = "com.apple.product-type.application";
+		};
+		5CFDCEB121167FC500FD0751 /* WhatsTodayTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5CFDCEBE21167FC500FD0751 /* Build configuration list for PBXNativeTarget "WhatsTodayTests" */;
+			buildPhases = (
+				5CFDCEAE21167FC500FD0751 /* Sources */,
+				5CFDCEAF21167FC500FD0751 /* Frameworks */,
+				5CFDCEB021167FC500FD0751 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5CFDCEB421167FC500FD0751 /* PBXTargetDependency */,
+			);
+			name = WhatsTodayTests;
+			productName = WhatsTodayTests;
+			productReference = 5CFDCEB221167FC500FD0751 /* WhatsTodayTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5CFDCE9621167FC400FD0751 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1000;
+				LastUpgradeCheck = 1000;
+				ORGANIZATIONNAME = "Joseph Van Boxtel";
+				TargetAttributes = {
+					5CFDCE9D21167FC400FD0751 = {
+						CreatedOnToolsVersion = 10.0;
+					};
+					5CFDCEB121167FC500FD0751 = {
+						CreatedOnToolsVersion = 10.0;
+						TestTargetID = 5CFDCE9D21167FC400FD0751;
+					};
+				};
+			};
+			buildConfigurationList = 5CFDCE9921167FC400FD0751 /* Build configuration list for PBXProject "WhatsToday" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 5CFDCE9521167FC400FD0751;
+			productRefGroup = 5CFDCE9F21167FC400FD0751 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5CFDCE9D21167FC400FD0751 /* WhatsToday */,
+				5CFDCEB121167FC500FD0751 /* WhatsTodayTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5CFDCE9C21167FC400FD0751 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5CFDCEAC21167FC500FD0751 /* LaunchScreen.storyboard in Resources */,
+				5CFDCEA921167FC500FD0751 /* Assets.xcassets in Resources */,
+				5CFDCEA721167FC500FD0751 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5CFDCEB021167FC500FD0751 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5CFDCE9A21167FC400FD0751 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5CFDCEA221167FC500FD0751 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5CFDCEAE21167FC500FD0751 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5CFDCEB421167FC500FD0751 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5CFDCE9D21167FC400FD0751 /* WhatsToday */;
+			targetProxy = 5CFDCEB321167FC500FD0751 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		5CFDCEA521167FC500FD0751 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5CFDCEA621167FC500FD0751 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		5CFDCEAA21167FC500FD0751 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5CFDCEAB21167FC500FD0751 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		5CFDCEB921167FC500FD0751 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		5CFDCEBA21167FC500FD0751 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5CFDCEBC21167FC500FD0751 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "$(SRCROOT)/WhatsToday/CoreApp/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = josephvb.WhatsToday;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5CFDCEBD21167FC500FD0751 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "$(SRCROOT)/WhatsToday/CoreApp/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = josephvb.WhatsToday;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		5CFDCEBF21167FC500FD0751 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = WhatsTodayTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = josephvb.WhatsTodayTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WhatsToday.app/WhatsToday";
+			};
+			name = Debug;
+		};
+		5CFDCEC021167FC500FD0751 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = WhatsTodayTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = josephvb.WhatsTodayTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WhatsToday.app/WhatsToday";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5CFDCE9921167FC400FD0751 /* Build configuration list for PBXProject "WhatsToday" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5CFDCEB921167FC500FD0751 /* Debug */,
+				5CFDCEBA21167FC500FD0751 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5CFDCEBB21167FC500FD0751 /* Build configuration list for PBXNativeTarget "WhatsToday" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5CFDCEBC21167FC500FD0751 /* Debug */,
+				5CFDCEBD21167FC500FD0751 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5CFDCEBE21167FC500FD0751 /* Build configuration list for PBXNativeTarget "WhatsTodayTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5CFDCEBF21167FC500FD0751 /* Debug */,
+				5CFDCEC021167FC500FD0751 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5CFDCE9621167FC400FD0751 /* Project object */;
+}
