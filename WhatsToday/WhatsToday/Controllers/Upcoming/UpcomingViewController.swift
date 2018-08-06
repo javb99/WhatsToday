@@ -15,7 +15,13 @@ class UpcomingViewController: UITableViewController {
         static let eventTableViewCellNib = UINib(nibName: "EventTableViewCell", bundle: nil)
     }
     
+    let calendarCalculator = CalendarCalculator()
+    
+    // The original events. This would be the birthdate.
     var events: [Event] = []
+    
+    // The upcoming anniversary of the event.
+    var upcomingEvents: [Event] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +35,19 @@ class UpcomingViewController: UITableViewController {
             let event = Event(title: titles[titleIndex], iconName: "giftBox", date: Date(timeIntervalSinceNow: secondsBack), lengthType: .age)
             events.append(event)
         }
+        
+        // Create anniversary events.
+        for event in events {
+            // Copy the event.
+            var anniversary = event
+            // Find the date of the anniversary.
+            let anniversaryDate = calendarCalculator.nextNotableAnniversary(of: event.date, granularity: .yearly)
+            // Set the date on anniversary
+            anniversary.date = anniversaryDate!
+            // Add anniversary to the array that is displayed by the table view.
+            upcomingEvents.append(anniversary)
+        }
+        
         tableView.register(StoryboardConstants.eventTableViewCellNib, forCellReuseIdentifier: StoryboardConstants.standardEventCellIdentifier)
     }
     
@@ -39,20 +58,29 @@ class UpcomingViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return events.count
+        return upcomingEvents.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: StoryboardConstants.standardEventCellIdentifier) as? EventTableViewCell else { fatalError() }
         
         let event = events[indexPath.row]
+        let upcomingEvent = upcomingEvents[indexPath.row]
         
-        cell.typeIconView.image = UIImage(named: event.iconName)
-        cell.titleLabel.text = event.title
-        cell.lengthLabel.text = "40 years old"
+        cell.typeIconView.image = UIImage(named: upcomingEvent.iconName)
+        cell.titleLabel.text = upcomingEvent.title
+        
+        let yearsOld = calendarCalculator.yearsBetween(event.date, upcomingEvent.date)
+        cell.lengthLabel.text = "\(yearsOld) years old"
         cell.lengthLabel.textColor = UIColor.darkGray
-        cell.daysLabel.text = "4 Days"
-        cell.dateLabel.text = "\(event.date)"
+        
+        let daysAway = calendarCalculator.daysBetween(Date(), upcomingEvent.date)
+        cell.daysLabel.text = "\(daysAway) Days"
+        
+        let month = calendarCalculator.calendar.component(.month, from: upcomingEvent.date)
+        let monthLabel = calendarCalculator.calendar.shortMonthSymbols[month-1]
+        let day = calendarCalculator.calendar.component(.day, from: upcomingEvent.date)
+        cell.dateLabel.text = "\(monthLabel) \(day)"
         
         return cell
     }
