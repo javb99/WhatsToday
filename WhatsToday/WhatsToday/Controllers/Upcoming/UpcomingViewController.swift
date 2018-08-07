@@ -50,6 +50,10 @@ class UpcomingViewController: UITableViewController {
             upcomingEvents.append(anniversary)
         }
         
+        // Set up dynamic sized rows.
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 50
+        
         tableView.register(StoryboardConstants.eventTableViewCellNib, forCellReuseIdentifier: StoryboardConstants.standardEventCellIdentifier)
         tableView.register(StoryboardConstants.closeEventTableViewCellNib, forCellReuseIdentifier: StoryboardConstants.closeEventCellIdentifier)
     }
