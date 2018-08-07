@@ -15,6 +15,7 @@
 		5CFDCEA721167FC500FD0751 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CFDCEA521167FC500FD0751 /* Main.storyboard */; };
 		5CFDCEA921167FC500FD0751 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CFDCEA821167FC500FD0751 /* Assets.xcassets */; };
 		5CFDCEAC21167FC500FD0751 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CFDCEAA21167FC500FD0751 /* LaunchScreen.storyboard */; };
+		FF0A42AA211A2E3900BD584E /* CloseEventTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF0A42A9211A2E3900BD584E /* CloseEventTableViewCell.xib */; };
 		FF56F76E2117C8B0003364A2 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF56F76D2117C8B0003364A2 /* Event.swift */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +44,7 @@
 		5CFDCEAD21167FC500FD0751 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5CFDCEB221167FC500FD0751 /* WhatsTodayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WhatsTodayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CFDCEB821167FC500FD0751 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FF0A42A9211A2E3900BD584E /* CloseEventTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CloseEventTableViewCell.xib; sourceTree = "<group>"; };
 		FF56F76D2117C8B0003364A2 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -69,6 +71,7 @@
 			children = (
 				5CD9771C2116916D00A3B572 /* UpcomingViewController.swift */,
 				5CD977262116A00700A3B572 /* EventTableViewCell.xib */,
+				FF0A42A9211A2E3900BD584E /* CloseEventTableViewCell.xib */,
 				5CD9772421169FF900A3B572 /* EventTableViewCell.swift */,
 				5CD9771721168F4800A3B572 /* Upcoming.playground */,
 			);
@@ -238,6 +241,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF0A42AA211A2E3900BD584E /* CloseEventTableViewCell.xib in Resources */,
 				5CA3B98D2116A243000D17BF /* EventTableViewCell.xib in Resources */,
 				5CFDCEAC21167FC500FD0751 /* LaunchScreen.storyboard in Resources */,
 				5CFDCEA921167FC500FD0751 /* Assets.xcassets in Resources */,

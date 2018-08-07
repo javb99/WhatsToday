@@ -13,6 +13,8 @@ class UpcomingViewController: UITableViewController {
     struct StoryboardConstants {
         static let standardEventCellIdentifier = "StandardEvent"
         static let eventTableViewCellNib = UINib(nibName: "EventTableViewCell", bundle: nil)
+        static let closeEventCellIdentifier = "CloseEvent"
+        static let closeEventTableViewCellNib = UINib(nibName: "CloseEventTableViewCell", bundle: nil)
     }
     
     let calendarCalculator = CalendarCalculator()
@@ -49,6 +51,7 @@ class UpcomingViewController: UITableViewController {
         }
         
         tableView.register(StoryboardConstants.eventTableViewCellNib, forCellReuseIdentifier: StoryboardConstants.standardEventCellIdentifier)
+        tableView.register(StoryboardConstants.closeEventTableViewCellNib, forCellReuseIdentifier: StoryboardConstants.closeEventCellIdentifier)
     }
     
     // MARK: Data Source
@@ -62,10 +65,20 @@ class UpcomingViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: StoryboardConstants.standardEventCellIdentifier) as? EventTableViewCell else { fatalError() }
         
         let event = events[indexPath.row]
         let upcomingEvent = upcomingEvents[indexPath.row]
+        
+        let daysAway = calendarCalculator.daysBetween(Date(), upcomingEvent.date)
+        
+        var identifier: String
+        if daysAway <= 1 {
+            identifier = StoryboardConstants.closeEventCellIdentifier
+        } else {
+            identifier = StoryboardConstants.standardEventCellIdentifier
+        }
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier) as? EventTableViewCell else { fatalError() }
         
         cell.typeIconView.image = UIImage(named: upcomingEvent.iconName)
         cell.titleLabel.text = upcomingEvent.title
@@ -74,13 +87,21 @@ class UpcomingViewController: UITableViewController {
         cell.lengthLabel.text = "\(yearsOld) years old"
         cell.lengthLabel.textColor = UIColor.darkGray
         
-        let daysAway = calendarCalculator.daysBetween(Date(), upcomingEvent.date)
-        cell.daysLabel.text = "\(daysAway) Days"
-        
-        let month = calendarCalculator.calendar.component(.month, from: upcomingEvent.date)
-        let monthLabel = calendarCalculator.calendar.shortMonthSymbols[month-1]
-        let day = calendarCalculator.calendar.component(.day, from: upcomingEvent.date)
-        cell.dateLabel.text = "\(monthLabel) \(day)"
+        if identifier == StoryboardConstants.standardEventCellIdentifier {
+            cell.daysLabel.text = "\(daysAway) Days"
+            
+            let month = calendarCalculator.calendar.component(.month, from: upcomingEvent.date)
+            let monthLabel = calendarCalculator.calendar.shortMonthSymbols[month-1]
+            let day = calendarCalculator.calendar.component(.day, from: upcomingEvent.date)
+            cell.dateLabel.text = "\(monthLabel) \(day)"
+            
+        } else if identifier == StoryboardConstants.closeEventCellIdentifier {
+            if daysAway == 0 {
+                cell.daysLabel.text = "Today"
+            } else {
+                cell.daysLabel.text = "Tomorrow"
+            }
+        }
         
         return cell
     }
