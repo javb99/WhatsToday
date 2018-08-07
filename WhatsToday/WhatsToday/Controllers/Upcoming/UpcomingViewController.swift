@@ -59,7 +59,8 @@ class UpcomingViewController: UITableViewController {
         
         // Set up dynamic sized rows.
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 50
+        // Currently this is the height in the xib. TODO: Adjust this based on dynamic text size.
+        tableView.estimatedRowHeight = 60
         
         // Tells the table view to use the nib(compiled xib file) when we ask for a cell with that identifier.
         tableView.register(StoryboardConstants.eventTableViewCellNib, forCellReuseIdentifier: StoryboardConstants.standardEventCellIdentifier)
@@ -92,7 +93,7 @@ class UpcomingViewController: UITableViewController {
         }
         
         // Ask the tableView for a cell that matches the identifier. And treats it as an EventTableViewCell because we know it always will be.
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier) as? EventTableViewCell else { fatalError() }
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier) as! EventTableViewCell
         
         // Sets the image on the left of the cell. For example, the gift box.
         cell.typeIconView.image = UIImage(named: upcomingEvent.iconName)
