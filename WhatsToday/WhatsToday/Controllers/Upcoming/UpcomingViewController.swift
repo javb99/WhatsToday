@@ -10,7 +10,7 @@ import UIKit
 
 
 
-class UpcomingViewController: UITableViewController {
+class UpcomingViewController: UITableViewController, AddEventDelegate {
     
     static let monthAndDayFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
@@ -27,6 +27,8 @@ class UpcomingViewController: UITableViewController {
         static let closeEventCellIdentifier = "CloseEvent"
         /// The nib for cells that have are for events that happen today or tomorrow.
         static let closeEventTableViewCellNib = UINib(nibName: "CloseEventTableViewCell", bundle: nil)
+        
+        static let showAddEventSegueIdentifier = "ShowAddEvent"
     }
     
     let calendarCalculator = CalendarCalculator()
@@ -40,12 +42,8 @@ class UpcomingViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Create random events.
-        let populator = EventPopulator()
-        events = populator.createRandomEvents(count: 100)
-        
         // Create anniversary events.
-        upcomingEvents = events.map { calendarCalculator.nextNotableAnniversary(of: $0, granularity: .yearly) }
+        refreshUpcomingEvents()
         
         // Set up dynamic sized rows.
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -55,6 +53,10 @@ class UpcomingViewController: UITableViewController {
         // Tells the table view to use the nib(compiled xib file) when we ask for a cell with that identifier.
         tableView.register(StoryboardConstants.eventTableViewCellNib, forCellReuseIdentifier: StoryboardConstants.standardEventCellIdentifier)
         tableView.register(StoryboardConstants.closeEventTableViewCellNib, forCellReuseIdentifier: StoryboardConstants.closeEventCellIdentifier)
+    }
+    
+    func refreshUpcomingEvents() {
+        upcomingEvents = events.map { calendarCalculator.nextNotableAnniversary(of: $0, granularity: .yearly) }
     }
     
     // MARK: Data Source
@@ -90,9 +92,12 @@ class UpcomingViewController: UITableViewController {
         // Sets the title. For birthdays it will probably be a name.
         cell.titleLabel.text = upcomingEvent.originalEvent.title
         
+        
         let yearsOld = calendarCalculator.yearsBetween(upcomingEvent.originalEvent.date, upcomingEvent.date)
         cell.lengthLabel.text = "\(yearsOld) years old"
         cell.lengthLabel.textColor = UIColor.darkGray
+        
+        print("\(yearsOld) years between \(upcomingEvent.originalEvent.date) and \(upcomingEvent.date)")
         
         if identifier == StoryboardConstants.standardEventCellIdentifier {
             cell.daysLabel.text = "\(daysAway) Days"
@@ -110,5 +115,31 @@ class UpcomingViewController: UITableViewController {
         
         return cell
     }
-
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case StoryboardConstants.showAddEventSegueIdentifier:
+            let controller = segue.destination as! AddEventViewController
+            controller.delegate = self
+        default:
+            break
+        }
+    }
+    
+    func addEventViewControllerCompleted(_ controller: AddEventViewController, with event: Event) {
+        // Add the Event to storage.
+        events.append(event)
+        
+        // Create the annivarsary value and reload the table.
+        refreshUpcomingEvents()
+        tableView.reloadData()
+        
+        // Dismiss the AddEventViewController
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func addEventViewControllerCanceled(_ controller: AddEventViewController) {
+        dismiss(animated: true, completion: nil)
+    }
 }

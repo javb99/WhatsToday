@@ -8,6 +8,13 @@
 
 import Foundation
 
+extension Calendar {
+    /// Trims off any components that aren't contained in `components`.
+    func date(keeping components: Set<Calendar.Component>, of date: Date) -> Date {
+        return self.date(from: dateComponents(components, from: date))!
+    }
+}
+
 enum Granularity {
     case yearly
 }
