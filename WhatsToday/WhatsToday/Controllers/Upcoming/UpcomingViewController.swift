@@ -8,7 +8,16 @@
 
 import UIKit
 
+
+
 class UpcomingViewController: UITableViewController {
+    
+    static let monthAndDayFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        // Format: Mar 3
+        dateFormatter.setLocalizedDateFormatFromTemplate("MMM d")
+        return dateFormatter
+    }()
     
     struct StoryboardConstants {
         static let standardEventCellIdentifier = "StandardEvent"
@@ -88,14 +97,8 @@ class UpcomingViewController: UITableViewController {
         if identifier == StoryboardConstants.standardEventCellIdentifier {
             cell.daysLabel.text = "\(daysAway) Days"
             
-            let month = calendarCalculator.calendar.component(.month, from: upcomingEvent.date)
-            // Get the month name from the month number. Subtract one because the monthSymbols are 0-based.
-            let monthLabel = calendarCalculator.calendar.shortMonthSymbols[month-1]
-            
-            let day = calendarCalculator.calendar.component(.day, from: upcomingEvent.date)
-            
-            // Set the date label to a formatted date. In the future we may use a DateFormatter for this.
-            cell.dateLabel.text = "\(monthLabel) \(day)"
+            // Set the date label to a formatted date.
+            cell.dateLabel.text = UpcomingViewController.monthAndDayFormatter.string(from: upcomingEvent.date)
             
         } else if identifier == StoryboardConstants.closeEventCellIdentifier {
             if daysAway == 0 {
