@@ -31,19 +31,9 @@ class UpcomingViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let titles = ["William", "Joe", "Khrystyna", "Sam", "Abbie"]
-        
-        // Create 20 random events.
-        for _ in 0..<20 {
-            let titleIndex = Int(arc4random()) % titles.count
-            // Integer between 2 and 21. (Inclusive)
-            let yearsBack = (arc4random() % 20) + 2
-            // Multiply years by the number of seconds in a year. (Rough)
-            let secondsBack = 0 - Double(60 * 60 * 24 * 365 * yearsBack)
-            let event = Event(title: titles[titleIndex], iconName: "giftBox", date: Date(timeIntervalSinceNow: secondsBack), lengthType: .age)
-            // Add the event to the events array.
-            events.append(event)
-        }
+        // Create random events.
+        let populator = EventPopulator()
+        events = populator.createRandomEvents(count: 100)
         
         // Create anniversary events.
         for event in events {
