@@ -20,11 +20,12 @@ struct CalendarCalculator {
         return c
     }()
     
-    func nextNotableAnniversary(of date: Date, granularity: Granularity) -> Date? {
+    func nextNotableAnniversary(of event: Event, granularity: Granularity) -> Anniversary {
         switch granularity {
         case .yearly:
-            let monthAndDay = calendar.dateComponents([.month, .day], from: date)
-            return calendar.nextDate(after: Date(), matching: monthAndDay, matchingPolicy: Calendar.MatchingPolicy.strict)
+            let monthAndDay = calendar.dateComponents([.month, .day], from: event.date)
+            let anniversaryDate = calendar.nextDate(after: Date(), matching: monthAndDay, matchingPolicy: Calendar.MatchingPolicy.strict)!
+            return Anniversary(originalEvent: event, date: anniversaryDate)
         }
     }
     

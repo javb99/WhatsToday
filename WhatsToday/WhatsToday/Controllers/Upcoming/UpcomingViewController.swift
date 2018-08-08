@@ -26,7 +26,7 @@ class UpcomingViewController: UITableViewController {
     var events: [Event] = []
     
     // The upcoming anniversary of the event.
-    var upcomingEvents: [Event] = []
+    var upcomingEvents: [Anniversary] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,16 +36,7 @@ class UpcomingViewController: UITableViewController {
         events = populator.createRandomEvents(count: 100)
         
         // Create anniversary events.
-        for event in events {
-            // Copy the event.
-            var anniversary = event
-            // Find the date of the anniversary.
-            let anniversaryDate = calendarCalculator.nextNotableAnniversary(of: event.date, granularity: .yearly)
-            // Set the date on anniversary
-            anniversary.date = anniversaryDate!
-            // Add anniversary to the array that is displayed by the table view.
-            upcomingEvents.append(anniversary)
-        }
+        upcomingEvents = events.map { calendarCalculator.nextNotableAnniversary(of: $0, granularity: .yearly) }
         
         // Set up dynamic sized rows.
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -69,7 +60,6 @@ class UpcomingViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let event = events[indexPath.row]
         let upcomingEvent = upcomingEvents[indexPath.row]
         
         let daysAway = calendarCalculator.daysBetween(Date(), upcomingEvent.date)
@@ -86,12 +76,12 @@ class UpcomingViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier) as! EventTableViewCell
         
         // Sets the image on the left of the cell. For example, the gift box.
-        cell.typeIconView.image = UIImage(named: upcomingEvent.iconName)
+        cell.typeIconView.image = UIImage(named: upcomingEvent.originalEvent.iconName)
         
         // Sets the title. For birthdays it will probably be a name.
-        cell.titleLabel.text = upcomingEvent.title
+        cell.titleLabel.text = upcomingEvent.originalEvent.title
         
-        let yearsOld = calendarCalculator.yearsBetween(event.date, upcomingEvent.date)
+        let yearsOld = calendarCalculator.yearsBetween(upcomingEvent.originalEvent.date, upcomingEvent.date)
         cell.lengthLabel.text = "\(yearsOld) years old"
         cell.lengthLabel.textColor = UIColor.darkGray
         
@@ -101,7 +91,9 @@ class UpcomingViewController: UITableViewController {
             let month = calendarCalculator.calendar.component(.month, from: upcomingEvent.date)
             // Get the month name from the month number. Subtract one because the monthSymbols are 0-based.
             let monthLabel = calendarCalculator.calendar.shortMonthSymbols[month-1]
+            
             let day = calendarCalculator.calendar.component(.day, from: upcomingEvent.date)
+            
             // Set the date label to a formatted date. In the future we may use a DateFormatter for this.
             cell.dateLabel.text = "\(monthLabel) \(day)"
             
