@@ -116,6 +116,25 @@ class UpcomingViewController: UITableViewController, AddEventDelegate {
         return cell
     }
     
+    // MARK: TableViewDelegate
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        switch editingStyle {
+        case .delete:
+            events.remove(at: indexPath.row)
+            upcomingEvents.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        default:
+            break
+        }
+    }
+    
+    // MARK: Navigation
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
@@ -126,6 +145,8 @@ class UpcomingViewController: UITableViewController, AddEventDelegate {
             break
         }
     }
+    
+    // MARK: AddEventViewControllerDelegate implementation.
     
     func addEventViewControllerCompleted(_ controller: AddEventViewController, with event: Event) {
         // Add the Event to storage.
