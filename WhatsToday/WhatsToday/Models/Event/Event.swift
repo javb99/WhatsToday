@@ -16,8 +16,16 @@ enum LengthType: Int, Codable {
 }
 
 struct Event: Codable {
-    var title: String
+    let title: String
     var iconName: String
-    var date: Date
+    let date: Date
     var lengthType: LengthType
+}
+
+extension Event: Equatable {
+    
+    /// Two Event values are considered equal if their title and date are equal.
+    static func ==(_ lhs: Event, _ rhs: Event) -> Bool {
+        return lhs.title == rhs.title && lhs.date == rhs.date
+    }
 }
