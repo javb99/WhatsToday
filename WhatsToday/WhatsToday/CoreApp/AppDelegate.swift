@@ -13,5 +13,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    /// Called when the app leaves the foreground.
+    func applicationWillResignActive(_ application: UIApplication) {
+        // This is a great place to save.
+        EventStorage.shared.save()
+    }
 }
 

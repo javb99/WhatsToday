@@ -33,9 +33,6 @@ class UpcomingViewController: UITableViewController, AddEventDelegate {
     
     let calendarCalculator = CalendarCalculator()
     
-    // The original events. This would be the birthdate.
-    var events: [Event] = []
-    
     // The upcoming anniversary of the event.
     var upcomingEvents: [Anniversary] = []
 
@@ -56,7 +53,8 @@ class UpcomingViewController: UITableViewController, AddEventDelegate {
     }
     
     func refreshUpcomingEvents() {
-        upcomingEvents = events.map { calendarCalculator.nextNotableAnniversary(of: $0, granularity: .yearly) }
+        // Find the next anniversary for all the events in EventStorage.
+        upcomingEvents = EventStorage.shared.events.map { calendarCalculator.nextNotableAnniversary(of: $0, granularity: .yearly) }
     }
     
     // MARK: Data Source
@@ -125,8 +123,12 @@ class UpcomingViewController: UITableViewController, AddEventDelegate {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         switch editingStyle {
         case .delete:
-            events.remove(at: indexPath.row)
-            upcomingEvents.remove(at: indexPath.row)
+            // The anniversary at this row.
+            let anniversary = upcomingEvents[indexPath.row]
+            // Remove the event originally added by the user.
+            EventStorage.shared.remove(anniversary.originalEvent)
+            // Then update the upcomingEvents and delete that row in the table.
+            refreshUpcomingEvents()
             tableView.deleteRows(at: [indexPath], with: .automatic)
         default:
             break
@@ -150,7 +152,7 @@ class UpcomingViewController: UITableViewController, AddEventDelegate {
     
     func addEventViewControllerCompleted(_ controller: AddEventViewController, with event: Event) {
         // Add the Event to storage.
-        events.append(event)
+        EventStorage.shared.add(event)
         
         // Create the annivarsary value and reload the table.
         refreshUpcomingEvents()
