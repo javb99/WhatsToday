@@ -8,14 +8,14 @@
 
 import Foundation
 
-enum LengthType {
+enum LengthType: Int, Codable {
     /// Years old
     case age
     /// Years
     case period
 }
 
-struct Event {
+struct Event: Codable {
     var title: String
     var iconName: String
     var date: Date
