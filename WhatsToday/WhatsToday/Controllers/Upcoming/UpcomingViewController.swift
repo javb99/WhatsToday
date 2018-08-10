@@ -55,6 +55,17 @@ class UpcomingViewController: UITableViewController, AddEventDelegate {
     func refreshUpcomingEvents() {
         // Find the next anniversary for all the events in EventStorage.
         upcomingEvents = EventStorage.shared.events.map { calendarCalculator.nextNotableAnniversary(of: $0, granularity: .yearly) }
+        
+        // Sort based on the number of days away from today. Fewest to most.
+        upcomingEvents.sort(by: should(_:comeBefore:))
+    }
+    
+    /// Returns true if anniversaryA is closer to today and thus should be ordered before anniversaryB.
+    func should(_ anniversaryA: Anniversary, comeBefore anniversaryB: Anniversary) -> Bool {
+        let now = Date()
+        let daysToA = calendarCalculator.daysBetween(now, anniversaryA.date)
+        let daysToB = calendarCalculator.daysBetween(now, anniversaryB.date)
+        return daysToA < daysToB
     }
     
     // MARK: Data Source
