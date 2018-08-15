@@ -13,6 +13,11 @@ extension Calendar {
     func date(keeping components: Set<Calendar.Component>, of date: Date) -> Date {
         return self.date(from: dateComponents(components, from: date))!
     }
+    
+    /// Today trimmed to only contain year, month, and day.
+    var today: Date {
+        return date(keeping: [.year, .month, .day], of: Date())
+    }
 }
 
 enum Granularity {
@@ -27,11 +32,14 @@ struct CalendarCalculator {
         return c
     }()
     
+    /// Find the next reminder event today or later.
     func nextNotableAnniversary(of event: Event, granularity: Granularity) -> Anniversary {
         switch granularity {
         case .yearly:
+            let today = calendar.date(keeping: [.year, .month, .day], of: Date())
             let monthAndDay = calendar.dateComponents([.month, .day], from: event.date)
-            let anniversaryDate = calendar.nextDate(after: Date(), matching: monthAndDay, matchingPolicy: Calendar.MatchingPolicy.strict)!
+            // Subtract 1 second from today to make the search behave as a >= today search.
+            let anniversaryDate = calendar.nextDate(after: today-1, matching: monthAndDay, matchingPolicy: Calendar.MatchingPolicy.strict)!
             return Anniversary(originalEvent: event, date: anniversaryDate)
         }
     }

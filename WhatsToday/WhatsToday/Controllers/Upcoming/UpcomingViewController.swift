@@ -67,9 +67,9 @@ class UpcomingViewController: UITableViewController, AddEventDelegate {
     
     /// Returns true if anniversaryA is closer to today and thus should be ordered before anniversaryB.
     func should(_ anniversaryA: Anniversary, comeBefore anniversaryB: Anniversary) -> Bool {
-        let now = Date()
-        let daysToA = calendarCalculator.daysBetween(now, anniversaryA.date)
-        let daysToB = calendarCalculator.daysBetween(now, anniversaryB.date)
+        let today = calendarCalculator.calendar.today
+        let daysToA = calendarCalculator.daysBetween(today, anniversaryA.date)
+        let daysToB = calendarCalculator.daysBetween(today, anniversaryB.date)
         return daysToA < daysToB
     }
     
@@ -106,7 +106,8 @@ class UpcomingViewController: UITableViewController, AddEventDelegate {
         
         let upcomingEvent = upcomingEvents[indexPath.row]
         
-        let daysAway = calendarCalculator.daysBetween(Date(), upcomingEvent.date)
+        let today = calendarCalculator.calendar.today
+        let daysAway = calendarCalculator.daysBetween(today, upcomingEvent.date)
         
         // If the upcoming event is tomorrow or today, use a different cell.
         var identifier: String
