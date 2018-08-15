@@ -13,9 +13,11 @@ public class EventTableViewCell: UITableViewCell {
     @IBOutlet public weak var titleLabel: UILabel!
     @IBOutlet public weak var dateLabel: UILabel!
     @IBOutlet public weak var daysLabel: UILabel!
+    @IBOutlet public weak var daysAwayText: UILabel!
     @IBOutlet public weak var lengthLabel: UILabel!
     @IBOutlet public weak var typeIconView: UIImageView!
-
+    @IBOutlet public weak var dateBackgroundView: UIView!
+    
     override public func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

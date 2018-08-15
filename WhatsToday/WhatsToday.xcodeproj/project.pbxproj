@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C1115E6211F65B700DC1A97 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1115E5211F65B700DC1A97 /* Colors.swift */; };
 		5CA3B98D2116A243000D17BF /* EventTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CD977262116A00700A3B572 /* EventTableViewCell.xib */; };
 		5CD9771D2116916D00A3B572 /* UpcomingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD9771C2116916D00A3B572 /* UpcomingViewController.swift */; };
 		5CD9772521169FF900A3B572 /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD9772421169FF900A3B572 /* EventTableViewCell.swift */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5C1115E5211F65B700DC1A97 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		5CD9771721168F4800A3B572 /* Upcoming.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Upcoming.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		5CD97719211690A200A3B572 /* Event.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Event.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		5CD9771C2116916D00A3B572 /* UpcomingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpcomingViewController.swift; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				5CFDCEA121167FC500FD0751 /* AppDelegate.swift */,
+				5C1115E5211F65B700DC1A97 /* Colors.swift */,
 				5CFDCEA521167FC500FD0751 /* Main.storyboard */,
 				5CFDCEA821167FC500FD0751 /* Assets.xcassets */,
 				5CFDCEAA21167FC500FD0751 /* LaunchScreen.storyboard */,
@@ -284,6 +287,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FF56F76E2117C8B0003364A2 /* Event.swift in Sources */,
+				5C1115E6211F65B700DC1A97 /* Colors.swift in Sources */,
 				5CF88936211A8EE500CE0D7B /* AddEventViewController.swift in Sources */,
 				5CF8892F21190C9500CE0D7B /* CalendarCalculator.swift in Sources */,
 				5CD9772521169FF900A3B572 /* EventTableViewCell.swift in Sources */,

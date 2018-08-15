@@ -8,7 +8,12 @@
 
 import UIKit
 
-
+/// Splits the range and returns the ith value in that range. So if you split the range from 10..<20 into 20 pieces the 10th value will be 10 * 0.5 + 10 = 15
+private func ithValue(i: Int, dividingRangeFrom lowerBound: CGFloat, lessThan upperBound: CGFloat, into pieces: Int) -> CGFloat {
+    let range = upperBound - lowerBound
+    let incrementPerPiece = range / CGFloat(pieces)
+    return upperBound - CGFloat(i) * incrementPerPiece
+}
 
 class UpcomingViewController: UITableViewController, AddEventDelegate {
     
@@ -68,6 +73,25 @@ class UpcomingViewController: UITableViewController, AddEventDelegate {
         return daysToA < daysToB
     }
     
+    func color(forDaysAway daysAway: Int) -> UIColor {
+        let appTintColor = ColorAssets.appTint
+        
+        var dayPercent: CGFloat
+        
+        switch daysAway {
+        case 0..<7: // Between 100% and 50% brighter
+            dayPercent = ithValue(i: daysAway, dividingRangeFrom: 0.5, lessThan: 1.0, into: 7)
+        case 7...31: // Between -20% and 50%
+            dayPercent = ithValue(i: daysAway-7, dividingRangeFrom: -0.2, lessThan: 0.5, into: 24)
+        case 32...90: // Between -40% and -20%
+            dayPercent = ithValue(i: daysAway-32, dividingRangeFrom: -0.4, lessThan: -0.2, into: 58)
+        default:
+            dayPercent = -0.4
+        }
+        
+        return appTintColor.colorBrighter(by: dayPercent)!
+    }
+    
     // MARK: Data Source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -108,11 +132,22 @@ class UpcomingViewController: UITableViewController, AddEventDelegate {
         
         print("\(yearsOld) years between \(upcomingEvent.originalEvent.date) and \(upcomingEvent.date)")
         
+        let rowColor = color(forDaysAway: daysAway)
+        
+        cell.daysLabel.textColor = rowColor
+        cell.typeIconView.tintColor = rowColor
+        
         if identifier == StoryboardConstants.standardEventCellIdentifier {
-            cell.daysLabel.text = "\(daysAway) Days"
+            cell.daysAwayText.textColor = rowColor
+            
+            cell.daysLabel.text = "\(daysAway)"
             
             // Set the date label to a formatted date.
             cell.dateLabel.text = UpcomingViewController.monthAndDayFormatter.string(from: upcomingEvent.date)
+            cell.dateLabel.textColor = .white
+            
+            cell.dateBackgroundView.backgroundColor = rowColor
+            cell.dateBackgroundView.layer.cornerRadius = 8
             
         } else if identifier == StoryboardConstants.closeEventCellIdentifier {
             if daysAway == 0 {
