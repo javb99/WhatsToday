@@ -1,5 +1,5 @@
 //
-//  Anniversary.swift
+//  Reminder.swift
 //  WhatsToday
 //
 //  Created by Joseph Van Boxtel on 8/7/18.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Anniversary {
+struct Reminder {
     var originalEvent: Event
     var date: Date
 }

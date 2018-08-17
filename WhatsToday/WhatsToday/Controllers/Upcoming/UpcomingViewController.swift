@@ -22,17 +22,17 @@ class UpcomingViewController: UITableViewController, AddEventDelegate {
         static let showAddEventSegueIdentifier = "ShowAddEvent"
     }
     
-    let calendarCalculator = CalendarCalculator()
+    let calendar = Calendar.autoupdatingCurrent
     
     let eventCellConfigurer = EventCellConfigurer()
     
-    // The upcoming anniversary of the event.
-    var upcomingEvents: [Anniversary] = []
+    // The upcoming reminder of the event.
+    var upcomingReminders: [Reminder] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Create anniversary events.
+        // Create reminder events.
         refreshUpcomingEvents()
         
         // Set up dynamic sized rows.
@@ -46,18 +46,18 @@ class UpcomingViewController: UITableViewController, AddEventDelegate {
     }
     
     func refreshUpcomingEvents() {
-        // Find the next anniversary for all the events in EventStorage.
-        upcomingEvents = EventStorage.shared.events.map { calendarCalculator.nextNotableAnniversary(of: $0, granularity: .yearly) }
+        // Find the next reminder for all the events in EventStorage.
+        upcomingReminders = EventStorage.shared.events.map { $0.nextReminder(using: self.calendar) }
         
         // Sort based on the number of days away from today. Fewest to most.
-        upcomingEvents.sort(by: should(_:comeBefore:))
+        upcomingReminders.sort(by: should(_:comeBefore:))
     }
     
-    /// Returns true if anniversaryA is closer to today and thus should be ordered before anniversaryB.
-    func should(_ anniversaryA: Anniversary, comeBefore anniversaryB: Anniversary) -> Bool {
-        let today = calendarCalculator.calendar.today
-        let daysToA = calendarCalculator.calendar.daysBetween(today, anniversaryA.date)
-        let daysToB = calendarCalculator.calendar.daysBetween(today, anniversaryB.date)
+    /// Returns true if `reminderA` is closer to today and thus should be ordered before `reminderB`.
+    func should(_ reminderA: Reminder, comeBefore reminderB: Reminder) -> Bool {
+        let today = calendar.today
+        let daysToA = calendar.daysBetween(today, reminderA.date)
+        let daysToB = calendar.daysBetween(today, reminderB.date)
         return daysToA < daysToB
     }
     
@@ -68,11 +68,11 @@ class UpcomingViewController: UITableViewController, AddEventDelegate {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return upcomingEvents.count
+        return upcomingReminders.count
     }
     
-    func cellIdentifier(for indexPath: IndexPath, upcomingEvent: Anniversary) -> String {
-        let daysAway = calendarCalculator.calendar.daysAway(from: upcomingEvent.date)
+    func cellIdentifier(for indexPath: IndexPath, upcomingEvent: Reminder) -> String {
+        let daysAway = calendar.daysAway(from: upcomingEvent.date)
         
         // If the upcoming event is tomorrow or today, use a different cell.
         var identifier: String
@@ -86,7 +86,7 @@ class UpcomingViewController: UITableViewController, AddEventDelegate {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let upcomingEvent = upcomingEvents[indexPath.row]
+        let upcomingEvent = upcomingReminders[indexPath.row]
         
         let identifier = cellIdentifier(for: indexPath, upcomingEvent: upcomingEvent)
         
@@ -107,11 +107,11 @@ class UpcomingViewController: UITableViewController, AddEventDelegate {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         switch editingStyle {
         case .delete:
-            // The anniversary at this row.
-            let anniversary = upcomingEvents[indexPath.row]
+            // The reminder at this row.
+            let reminder = upcomingReminders[indexPath.row]
             // Remove the event originally added by the user.
-            EventStorage.shared.remove(anniversary.originalEvent)
-            // Then update the upcomingEvents and delete that row in the table.
+            EventStorage.shared.remove(reminder.originalEvent)
+            // Then update the upcomingReminders and delete that row in the table.
             refreshUpcomingEvents()
             tableView.deleteRows(at: [indexPath], with: .automatic)
         default:

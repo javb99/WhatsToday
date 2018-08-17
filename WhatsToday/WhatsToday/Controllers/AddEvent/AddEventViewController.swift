@@ -37,7 +37,7 @@ class AddEventViewController: UIViewController {
     /// Completion button has been pressed. Form the Event and inform the delegate of completion.
     @IBAction func completePressed(_ sender: UIButton) {
         let fixedDate = Calendar.current.date(keeping: [.year, .month, .day], of: datePicker.date)
-        let event = Event(title: titleTextField.text ?? "Untitled", iconName: "giftBox", date: fixedDate, lengthType: .age)
+        let event = Event(title: titleTextField.text ?? "Untitled", iconName: "giftBox", date: fixedDate, lengthType: .age, reminderFrequency: .yearly)
         delegate?.addEventViewControllerCompleted(self, with: event)
     }
     

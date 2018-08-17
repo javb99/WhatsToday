@@ -39,10 +39,10 @@ let now = Date()
 let williamsBdayComponents = DateComponents(year: 2000, month: 5, day: 4)
 let williamsBDay = calendar.date(from: williamsBdayComponents)!
 
-// Find the next anniversary.
+// Find the next reminder.
 let williamsNineteenthBday = calendar.nextNotableAnniversary(after: now, matching: DateComponents(month: 5, day: 4), ofImportance: Importance.yearly)!
 
-// Find the year of the anniversary.
+// Find the year of the reminder.
 let years = calendar.dateComponents([.year], from: williamsBDay, to: williamsNineteenthBday).year!
 
 // Find days away from now.

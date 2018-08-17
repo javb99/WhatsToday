@@ -55,7 +55,7 @@ struct EventCellConfigurer {
     }
     
     /// Configures the given cell for the givent event.
-    func configureCell(_ cell: EventTableViewCell, using upcomingEvent: Anniversary) {
+    func configureCell(_ cell: EventTableViewCell, using upcomingEvent: Reminder) {
         let daysAway = calender.daysAway(from: upcomingEvent.date)
         
         // Sets the image on the left of the cell. For example, the gift box.

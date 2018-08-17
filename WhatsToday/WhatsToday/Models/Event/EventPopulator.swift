@@ -48,6 +48,6 @@ struct EventPopulator {
     
     /// Create `count` Event values
     func createRandomEvents(count: Int) -> [Event] {
-        return (0..<count).map { _ in Event(title: randomTitle(), iconName: randomIconName(), date: randomBirthdate(), lengthType: .age) }
+        return (0..<count).map { _ in Event(title: randomTitle(), iconName: randomIconName(), date: randomBirthdate(), lengthType: .age, reminderFrequency: .yearly) }
     }
 }

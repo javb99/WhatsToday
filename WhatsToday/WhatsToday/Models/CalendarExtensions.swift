@@ -40,29 +40,9 @@ extension Calendar {
         let components = dateComponents([.year, .month], from: start, to: end)
         return (years: components.year!, months: components.month!)
     }
-}
-
-enum Granularity {
-    case yearly
-}
-
-struct CalendarCalculator {
     
-    var calendar: Calendar = {
-        var c = Calendar(identifier: .gregorian)
-        c.locale = Locale.autoupdatingCurrent
-        return c
-    }()
-    
-    /// Find the next reminder event today or later.
-    func nextNotableAnniversary(of event: Event, granularity: Granularity) -> Anniversary {
-        switch granularity {
-        case .yearly:
-            let today = calendar.date(keeping: [.year, .month, .day], of: Date())
-            let monthAndDay = calendar.dateComponents([.month, .day], from: event.date)
-            // Subtract 1 second from today to make the search behave as a >= today search.
-            let anniversaryDate = calendar.nextDate(after: today-1, matching: monthAndDay, matchingPolicy: Calendar.MatchingPolicy.strict)!
-            return Anniversary(originalEvent: event, date: anniversaryDate)
-        }
+    /// Subtract 1 second from today to make the search behave as a >= today search.
+    func nextDateAtOr(after date: Date, matching components: DateComponents, matchingPolicy: Calendar.MatchingPolicy = .strict) -> Date? {
+        return self.nextDate(after: date-1, matching: components, matchingPolicy: matchingPolicy)
     }
 }
