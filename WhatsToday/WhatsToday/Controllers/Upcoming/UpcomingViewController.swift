@@ -40,8 +40,8 @@ class UpcomingViewController: UITableViewController, AddEventDelegate {
         tableView.estimatedRowHeight = 60
         
         // Tells the table view to use the nib(compiled xib file) when we ask for a cell with that identifier.
-        tableView.registerCellIdentifierAndNib(EventTableViewCell.Identifier.standardEvent)
-        tableView.registerCellIdentifierAndNib(EventTableViewCell.Identifier.closeEvent)
+        tableView.register(EventTableViewCell.standardEventNib, forCellReuseIdentifier: EventTableViewCell.standardEventIdentifier)
+        tableView.register(EventTableViewCell.closeEventNib, forCellReuseIdentifier: EventTableViewCell.closeEventIdentifier)
     }
     
     func refreshUpcomingEvents() {
@@ -62,15 +62,15 @@ class UpcomingViewController: UITableViewController, AddEventDelegate {
         return upcomingReminders.count
     }
     
-    func cellIdentifier(for indexPath: IndexPath, upcomingEvent: Reminder) -> EventTableViewCell.Identifier {
+    func cellIdentifier(for indexPath: IndexPath, upcomingEvent: Reminder) -> String {
         let daysAway = calendar.daysAway(from: upcomingEvent.date)
         
         // If the upcoming event is tomorrow or today, use a different cell.
-        var identifier: EventTableViewCell.Identifier
+        var identifier: String
         if daysAway <= 1 {
-            identifier = .closeEvent
+            identifier = EventTableViewCell.closeEventIdentifier
         } else {
-            identifier = .standardEvent
+            identifier = EventTableViewCell.standardEventIdentifier
         }
         return identifier
     }
@@ -82,7 +82,7 @@ class UpcomingViewController: UITableViewController, AddEventDelegate {
         let identifier = cellIdentifier(for: indexPath, upcomingEvent: upcomingEvent)
         
         // Ask the tableView for a cell that matches the identifier. And treats it as an EventTableViewCell because we know it always will be.
-        let cell = tableView.dequeueReusableCell(withIdentifier: identifier.rawValue) as! EventTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier) as! EventTableViewCell
         
         eventCellConfigurer.configureCell(cell, using: upcomingEvent)
         
@@ -120,7 +120,8 @@ class UpcomingViewController: UITableViewController, AddEventDelegate {
         
         switch identifier {
         case .showAddEvent:
-            let controller = segue.destination as! AddEventViewController
+            let navController = segue.destination as! UINavigationController
+            let controller = navController.childViewControllers.first as! AddEventViewController
             controller.delegate = self
         }
     }

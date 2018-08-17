@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="RrM-17-FBH">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -17,7 +17,7 @@
             <objects>
                 <navigationController id="RrM-17-FBH" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="m77-Cb-OYt">
-                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
+                        <rect key="frame" x="0.0" y="44" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -33,11 +33,11 @@
             <objects>
                 <viewController id="pcI-aY-2hu" customClass="AddEventViewController" customModule="WhatsToday" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="S2J-fN-e6Q">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eXm-cv-9Hb">
-                                <rect key="frame" x="171" y="616" width="33" height="33"/>
+                                <rect key="frame" x="171" y="727" width="33" height="33"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <state key="normal" title="Add"/>
                                 <connections>
@@ -45,7 +45,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HPa-Ul-PKW">
-                                <rect key="frame" x="16" y="20" width="48" height="30"/>
+                                <rect key="frame" x="16" y="44" width="48" height="30"/>
                                 <state key="normal" title="Cancel">
                                     <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -54,13 +54,13 @@
                                 </connections>
                             </button>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Wkc-dy-kjF">
-                                <rect key="frame" x="0.0" y="359" width="375" height="216"/>
+                                <rect key="frame" x="0.0" y="426.66666666666674" width="375" height="216"/>
                                 <date key="date" timeIntervalSinceReferenceDate="555389510.04097903">
                                     <!--2018-08-08 02:51:50 +0000-->
                                 </date>
                             </datePicker>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title here" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0cT-WW-Ets">
-                                <rect key="frame" x="40" y="328.5" width="295" height="30"/>
+                                <rect key="frame" x="40" y="396" width="295" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="continue" enablesReturnKeyAutomatically="YES"/>
@@ -107,12 +107,43 @@
             </objects>
             <point key="canvasLocation" x="50" y="-662"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="siT-KI-WS8">
+            <objects>
+                <navigationController id="hss-WC-I42" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="i9G-Dy-TtT">
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="M2L-oe-C6D" kind="relationship" relationship="rootViewController" id="0JY-Su-G0y"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kdG-5s-3PV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="830" y="-663"/>
+        </scene>
+        <!--Add Event View Controller-->
+        <scene sceneID="n3y-08-2uC">
+            <objects>
+                <viewController id="M2L-oe-C6D" customClass="AddEventViewController" customModule="WhatsToday" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2XH-Hl-Uds">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="cFR-N8-WIm"/>
+                    </view>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="1dB-bu-gi9"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xNR-Gx-a9x" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1893.5999999999999" y="-654.67980295566508"/>
+        </scene>
         <!--Upcoming-->
         <scene sceneID="PpN-dm-AjA">
             <objects>
                 <tableViewController id="SLn-JW-nlE" customClass="UpcomingViewController" customModule="WhatsToday" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="rin-DL-906">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <connections>
@@ -123,7 +154,7 @@
                     <navigationItem key="navigationItem" title="Upcoming" id="7at-pE-rKo">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="zSN-UD-aIL">
                             <connections>
-                                <segue destination="pcI-aY-2hu" kind="presentation" identifier="ShowAddEvent" id="ywj-3m-nv1"/>
+                                <segue destination="hss-WC-I42" kind="show" identifier="ShowAddEvent" id="nJl-DS-zjQ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
