@@ -35,6 +35,11 @@ class UpcomingViewController: UITableViewController, AddEventDelegate {
         // Create reminder events.
         refreshUpcomingEvents()
         
+        configureTableView()
+    }
+    
+    /// Register cell identifiers and do other initial configuration for the tableView. This is currently intended to be called during viewDidLoad.
+    func configureTableView() {
         // Set up dynamic sized rows.
         tableView.rowHeight = UITableViewAutomaticDimension
         // Currently this is the height in the xib. TODO: Adjust this based on dynamic text size.
