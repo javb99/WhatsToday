@@ -16,10 +16,10 @@ protocol AddEventDelegate: class {
 }
 
 /// A ViewController that is responsible for creating new Events.
-class AddEventViewController: UIViewController, UITableViewDataSource {
+class AddEventViewController: UIViewController {
     
     /// The table view that holds all the editing fields.
-    var inputTableView: UITableView!
+    var eventInputController: EventInputTableViewController!
     
     /// The cell to use for the preview.
     var previewCell: EventTableViewCell!
@@ -36,13 +36,11 @@ class AddEventViewController: UIViewController, UITableViewDataSource {
     /// Will be swapped back and forth with the keyboardConstraint.
     var safeAreaConstraint: NSLayoutConstraint?
     
-    /// The date picker in the cell for the date.
-    var datePicker: UIDatePicker?
-    
-    /// The text field in the cell for the title. Set when the table is loaded.
-    var titleTextField: UITextField?
-    
-    var currentEvent: Event = EventPopulator().createRandomEvents(count: 1).first!
+    var currentEvent: Event = EventPopulator().createRandomEvents(count: 1).first! {
+        didSet {
+            refreshPreviewCell()
+        }
+    }
     
     /// The delegate is informed of completion and cancelation.
     weak var delegate: AddEventDelegate?
@@ -55,7 +53,7 @@ class AddEventViewController: UIViewController, UITableViewDataSource {
         configureNavBarItem()
         configurePreviewCell()
         configurePreviewTableView()
-        configureInputTableView()
+        addEventInputController()
         setUpConstraints()
         
         refreshPreviewCell()
@@ -94,26 +92,28 @@ class AddEventViewController: UIViewController, UITableViewDataSource {
         view.addSubview(previewTableView)
     }
     
-    func configureInputTableView() {
-        let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.allowsSelection = false
-        tableView.dataSource = self
+    func addEventInputController() {
+        let eventInputController = EventInputTableViewController(style: .grouped)
         
-        tableView.register(TextFieldTableViewCell.self, forCellReuseIdentifier: "Title")
-        tableView.register(DatePickerTableViewCell.self, forCellReuseIdentifier: "DatePicker")
+        // 4 boilerplate lines to add the controller.
+        addChildViewController(eventInputController)
+        eventInputController.view.frame = .zero
+        view.addSubview(eventInputController.view)
+        eventInputController.didMove(toParentViewController: self)
         
-        inputTableView = tableView
-        view.addSubview(inputTableView)
+        eventInputController.delegate = self
+        
+        self.eventInputController = eventInputController
     }
     
     func setUpConstraints() {
         previewTableView.translatesAutoresizingMaskIntoConstraints = false
-        inputTableView.translatesAutoresizingMaskIntoConstraints = false
+        eventInputController.view.translatesAutoresizingMaskIntoConstraints = false
         
-        inputTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
-        inputTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
-        inputTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
-        inputTableView.bottomAnchor.constraint(equalTo: previewTableView.topAnchor, constant: 0).isActive = true
+        eventInputController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
+        eventInputController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
+        eventInputController.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
+        eventInputController.view.bottomAnchor.constraint(equalTo: previewTableView.topAnchor, constant: 0).isActive = true
         
         previewTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
         previewTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
@@ -127,81 +127,6 @@ class AddEventViewController: UIViewController, UITableViewDataSource {
         cellConfigurer.configureCell(previewCell, using: currentEvent.nextReminder(using: cellConfigurer.calender))
     }
     
-    // MARK: TableView Data Source
-    
-    enum Section: Int {
-        case title, date//, icon, type, fequency
-        static let caseCount = 2
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return Section.caseCount
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection index: Int) -> String? {
-        guard let section = Section(rawValue: index) else { fatalError("Unexpected section index. You probably forgot to add a case to row.") }
-        switch section {
-        case .title:
-            return "Title"
-        case.date:
-            return "Date"
-        }
-    }
-    
-    func reuseIdentifier(for indexPath: IndexPath) -> String {
-        guard let section = Section(rawValue: indexPath.section) else { fatalError("Unexpected section index. You probably forgot to add a case to row.") }
-        switch section {
-        case .title:
-            return "Title"
-        case.date:
-            return "DatePicker"
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let section = Section(rawValue: indexPath.section) else { fatalError("Unexpected section index. You probably forgot to add a case to row.") }
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier(for: indexPath)) else {
-            fatalError("Could not load nib. Did you make the table view cell the only top level object?")
-        }
-        
-        switch section {
-        case .title:
-            let textFieldCell = cell as! TextFieldTableViewCell
-            titleTextField = textFieldCell.textField
-            textFieldCell.textField.placeholder = "i.e. Joseph Van Boxtel"
-            titleTextField?.addTarget(self, action: #selector(finishedEditing(_:)), for: .editingDidEndOnExit)
-            
-        case .date:
-            let datePickerCell = cell as! DatePickerTableViewCell
-            datePicker = datePickerCell.datePicker
-            datePicker?.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
-        }
-        return cell
-    }
-    
-    // MARK: Actions
-
-    /// Send when the titleTextField presses the return key.
-    @IBAction func finishedEditing(_ sender: UITextField) {
-        titleTextField?.resignFirstResponder()
-        guard let titleText = titleTextField?.text else { return }
-        // Change the title on the current event.
-        currentEvent = Event(title: titleText, iconName: currentEvent.iconName, date: currentEvent.date, lengthType: currentEvent.lengthType, reminderFrequency: currentEvent.reminderFrequency)
-        refreshPreviewCell()
-    }
-    
-    /// Send when the datePicker's value changes.
-    @IBAction func dateChanged(_ sender: UIDatePicker) {
-        guard let date = datePicker?.date else { return }
-        // Change the date on the current event.
-        currentEvent = Event(title: currentEvent.title, iconName: currentEvent.iconName, date: date, lengthType: currentEvent.lengthType, reminderFrequency: currentEvent.reminderFrequency)
-        refreshPreviewCell()
-    }
-    
     // MARK: Completion/Cancelation
     
     /// Completion button has been pressed. Form the Event and inform the delegate of completion.
@@ -212,5 +137,18 @@ class AddEventViewController: UIViewController, UITableViewDataSource {
     /// Cancel button has been pressed. Inform the delegate of cancelation.
     @IBAction func cancelPressed(_ sender: UIButton) {
         delegate?.addEventViewControllerCanceled(self)
+    }
+}
+
+extension AddEventViewController: EventInputDelegate {
+    
+    func titleChanged(_ newTitle: String) {
+        // Duplicate currentEvent changing the title.
+        currentEvent = Event(title: newTitle, iconName: currentEvent.iconName, date: currentEvent.date, lengthType: currentEvent.lengthType, reminderFrequency: currentEvent.reminderFrequency)
+    }
+    
+    func dateChanged(_ newDate: Date) {
+        // Duplicate currentEvent changing the date.
+        currentEvent = Event(title: currentEvent.title, iconName: currentEvent.iconName, date: newDate, lengthType: currentEvent.lengthType, reminderFrequency: currentEvent.reminderFrequency)
     }
 }
