@@ -50,15 +50,7 @@ class UpcomingViewController: UITableViewController, AddEventDelegate {
         upcomingReminders = EventStorage.shared.events.map { $0.nextReminder(using: self.calendar) }
         
         // Sort based on the number of days away from today. Fewest to most.
-        upcomingReminders.sort(by: should(_:comeBefore:))
-    }
-    
-    /// Returns true if `reminderA` is closer to today and thus should be ordered before `reminderB`.
-    func should(_ reminderA: Reminder, comeBefore reminderB: Reminder) -> Bool {
-        let today = calendar.today
-        let daysToA = calendar.daysBetween(today, reminderA.date)
-        let daysToB = calendar.daysBetween(today, reminderB.date)
-        return daysToA < daysToB
+        upcomingReminders.sort { $0.date < $1.date }
     }
     
     // MARK: Data Source
