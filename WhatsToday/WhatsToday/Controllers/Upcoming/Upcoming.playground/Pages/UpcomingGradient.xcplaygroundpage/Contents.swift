@@ -20,10 +20,17 @@ extension UIColor {
     }
 }
 
-func ithValue(i: Int, dividingRangeFrom lowerBound: CGFloat, lessThan upperBound: CGFloat, into pieces: Int) -> CGFloat {
-    let range = upperBound - lowerBound
-    let incrementPerPiece = range / CGFloat(pieces)
-    return upperBound - CGFloat(i) * incrementPerPiece
+private extension ClosedRange where Bound: Strideable {
+    /// The distance between the lower bound and upper bound.
+    var length: Bound.Stride {
+        return lowerBound.distance(to: upperBound)
+    }
+}
+
+/// Splits the range into `count` equidistant values including `upperbound` and `lowerbound` and returns the ith value. So if you split the range from 10...20 into 11 would give the equidistant values [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20].
+private func ithEquidistantValue(i: Int, within range: ClosedRange<CGFloat>, count: Int) -> CGFloat {
+    let incrementPerPiece = range.length / CGFloat(count-1)
+    return range.upperBound - CGFloat(i) * incrementPerPiece
 }
 
 class ColorDataSource: NSObject, UITableViewDataSource {
@@ -35,11 +42,11 @@ class ColorDataSource: NSObject, UITableViewDataSource {
         
         switch daysAway {
         case 0..<7: // Between 100% and 50% brighter
-            dayPercent = ithValue(i: daysAway, dividingRangeFrom: 0.5, lessThan: 1.0, into: 7)
+            dayPercent = ithEquidistantValue(i: daysAway, within: 0.5...1.0, count: 7)
         case 7...31: // Between -20% and 50%
-            dayPercent = ithValue(i: daysAway-7, dividingRangeFrom: -0.2, lessThan: 0.5, into: 24)
+            dayPercent = ithEquidistantValue(i: daysAway-7, within: -0.2...0.5, count: 24)
         case 32...90: // Between -40% and -20%
-            dayPercent = ithValue(i: daysAway-32, dividingRangeFrom: -0.4, lessThan: -0.2, into: 58)
+            dayPercent = ithEquidistantValue(i: daysAway-32, within: -0.4...(-0.2), count: 58)
         default:
             dayPercent = -0.4
         }

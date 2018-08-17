@@ -8,21 +8,7 @@
 
 import UIKit
 
-/// Splits the range and returns the ith value in that range. So if you split the range from 10..<20 into 20 pieces the 10th value will be 10 * 0.5 + 10 = 15
-private func ithValue(i: Int, dividingRangeFrom lowerBound: CGFloat, lessThan upperBound: CGFloat, into pieces: Int) -> CGFloat {
-    let range = upperBound - lowerBound
-    let incrementPerPiece = range / CGFloat(pieces)
-    return upperBound - CGFloat(i) * incrementPerPiece
-}
-
 class UpcomingViewController: UITableViewController, AddEventDelegate {
-    
-    static let monthAndDayFormatter: DateFormatter = {
-        let dateFormatter = DateFormatter()
-        // Format: Mar 3
-        dateFormatter.setLocalizedDateFormatFromTemplate("MMM d")
-        return dateFormatter
-    }()
     
     struct StoryboardConstants {
         static let standardEventCellIdentifier = "StandardEvent"
@@ -37,6 +23,8 @@ class UpcomingViewController: UITableViewController, AddEventDelegate {
     }
     
     let calendarCalculator = CalendarCalculator()
+    
+    let eventCellConfigurer = EventCellConfigurer()
     
     // The upcoming anniversary of the event.
     var upcomingEvents: [Anniversary] = []
@@ -68,28 +56,9 @@ class UpcomingViewController: UITableViewController, AddEventDelegate {
     /// Returns true if anniversaryA is closer to today and thus should be ordered before anniversaryB.
     func should(_ anniversaryA: Anniversary, comeBefore anniversaryB: Anniversary) -> Bool {
         let today = calendarCalculator.calendar.today
-        let daysToA = calendarCalculator.daysBetween(today, anniversaryA.date)
-        let daysToB = calendarCalculator.daysBetween(today, anniversaryB.date)
+        let daysToA = calendarCalculator.calendar.daysBetween(today, anniversaryA.date)
+        let daysToB = calendarCalculator.calendar.daysBetween(today, anniversaryB.date)
         return daysToA < daysToB
-    }
-    
-    func color(forDaysAway daysAway: Int) -> UIColor {
-        let appTintColor = ColorAssets.appTint
-        
-        var dayPercent: CGFloat
-        
-        switch daysAway {
-        case 0..<7: // Between 100% and 50% brighter
-            dayPercent = ithValue(i: daysAway, dividingRangeFrom: 0.5, lessThan: 1.0, into: 7)
-        case 7...31: // Between -20% and 50%
-            dayPercent = ithValue(i: daysAway-7, dividingRangeFrom: -0.2, lessThan: 0.5, into: 24)
-        case 32...90: // Between -40% and -20%
-            dayPercent = ithValue(i: daysAway-32, dividingRangeFrom: -0.4, lessThan: -0.2, into: 58)
-        default:
-            dayPercent = -0.4
-        }
-        
-        return appTintColor.colorBrighter(by: dayPercent)!
     }
     
     // MARK: Data Source
@@ -102,12 +71,8 @@ class UpcomingViewController: UITableViewController, AddEventDelegate {
         return upcomingEvents.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let upcomingEvent = upcomingEvents[indexPath.row]
-        
-        let today = calendarCalculator.calendar.today
-        let daysAway = calendarCalculator.daysBetween(today, upcomingEvent.date)
+    func cellIdentifier(for indexPath: IndexPath, upcomingEvent: Anniversary) -> String {
+        let daysAway = calendarCalculator.calendar.daysAway(from: upcomingEvent.date)
         
         // If the upcoming event is tomorrow or today, use a different cell.
         var identifier: String
@@ -116,47 +81,19 @@ class UpcomingViewController: UITableViewController, AddEventDelegate {
         } else {
             identifier = StoryboardConstants.standardEventCellIdentifier
         }
+        return identifier
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let upcomingEvent = upcomingEvents[indexPath.row]
+        
+        let identifier = cellIdentifier(for: indexPath, upcomingEvent: upcomingEvent)
         
         // Ask the tableView for a cell that matches the identifier. And treats it as an EventTableViewCell because we know it always will be.
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier) as! EventTableViewCell
         
-        // Sets the image on the left of the cell. For example, the gift box.
-        cell.typeIconView.image = UIImage(named: upcomingEvent.originalEvent.iconName)
-        
-        // Sets the title. For birthdays it will probably be a name.
-        cell.titleLabel.text = upcomingEvent.originalEvent.title
-        
-        
-        let yearsOld = calendarCalculator.yearsBetween(upcomingEvent.originalEvent.date, upcomingEvent.date)
-        cell.lengthLabel.text = "\(yearsOld) years old"
-        cell.lengthLabel.textColor = UIColor.darkGray
-        
-        print("\(yearsOld) years between \(upcomingEvent.originalEvent.date) and \(upcomingEvent.date)")
-        
-        let rowColor = color(forDaysAway: daysAway)
-        
-        cell.daysLabel.textColor = rowColor
-        cell.typeIconView.tintColor = rowColor
-        
-        if identifier == StoryboardConstants.standardEventCellIdentifier {
-            cell.daysAwayText.textColor = rowColor
-            
-            cell.daysLabel.text = "\(daysAway)"
-            
-            // Set the date label to a formatted date.
-            cell.dateLabel.text = UpcomingViewController.monthAndDayFormatter.string(from: upcomingEvent.date)
-            cell.dateLabel.textColor = .white
-            
-            cell.dateBackgroundView.backgroundColor = rowColor
-            cell.dateBackgroundView.layer.cornerRadius = 8
-            
-        } else if identifier == StoryboardConstants.closeEventCellIdentifier {
-            if daysAway == 0 {
-                cell.daysLabel.text = "Today"
-            } else {
-                cell.daysLabel.text = "Tomorrow"
-            }
-        }
+        eventCellConfigurer.configureCell(cell, using: upcomingEvent)
         
         return cell
     }

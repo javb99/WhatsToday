@@ -9,7 +9,6 @@
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Baseline standard spacing" minToolsVersion="9.0"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -67,7 +66,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" name="appTint"/>
+                                <color key="backgroundColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="M0N-4W-SDc" secondAttribute="trailing" id="ND2-bi-GeM"/>
                                     <constraint firstAttribute="bottom" secondItem="M0N-4W-SDc" secondAttribute="bottom" id="Rio-eJ-Dy5"/>
@@ -121,9 +120,4 @@
             <point key="canvasLocation" x="36" y="57"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <namedColor name="appTint">
-            <color red="0.010999999940395355" green="0.39599999785423279" blue="0.75400000810623169" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-    </resources>
 </document>

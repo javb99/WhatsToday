@@ -12,6 +12,7 @@
 		5CD9771D2116916D00A3B572 /* UpcomingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD9771C2116916D00A3B572 /* UpcomingViewController.swift */; };
 		5CD9772521169FF900A3B572 /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD9772421169FF900A3B572 /* EventTableViewCell.swift */; };
 		5CE53927211CFF330000704C /* EventStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE53926211CFF330000704C /* EventStorage.swift */; };
+		5CED274821249B64008D9960 /* EventCellConfigurer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CED274721249B64008D9960 /* EventCellConfigurer.swift */; };
 		5CF8892F21190C9500CE0D7B /* CalendarCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF8892E21190C9500CE0D7B /* CalendarCalculator.swift */; };
 		5CF88931211A650700CE0D7B /* EventPopulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF88930211A650700CE0D7B /* EventPopulator.swift */; };
 		5CF88933211A6CB000CE0D7B /* Anniversary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF88932211A6CB000CE0D7B /* Anniversary.swift */; };
@@ -42,6 +43,7 @@
 		5CD9772421169FF900A3B572 /* EventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		5CD977262116A00700A3B572 /* EventTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventTableViewCell.xib; sourceTree = "<group>"; };
 		5CE53926211CFF330000704C /* EventStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventStorage.swift; sourceTree = "<group>"; };
+		5CED274721249B64008D9960 /* EventCellConfigurer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCellConfigurer.swift; sourceTree = "<group>"; };
 		5CF8892E21190C9500CE0D7B /* CalendarCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCalculator.swift; sourceTree = "<group>"; };
 		5CF88930211A650700CE0D7B /* EventPopulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPopulator.swift; sourceTree = "<group>"; };
 		5CF88932211A6CB000CE0D7B /* Anniversary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Anniversary.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 				5CD977262116A00700A3B572 /* EventTableViewCell.xib */,
 				FF0A42A9211A2E3900BD584E /* CloseEventTableViewCell.xib */,
 				5CD9772421169FF900A3B572 /* EventTableViewCell.swift */,
+				5CED274721249B64008D9960 /* EventCellConfigurer.swift */,
 				5CD9771721168F4800A3B572 /* Upcoming.playground */,
 			);
 			path = Upcoming;
@@ -292,6 +295,7 @@
 				5CF8892F21190C9500CE0D7B /* CalendarCalculator.swift in Sources */,
 				5CD9772521169FF900A3B572 /* EventTableViewCell.swift in Sources */,
 				5CE53927211CFF330000704C /* EventStorage.swift in Sources */,
+				5CED274821249B64008D9960 /* EventCellConfigurer.swift in Sources */,
 				5CD9771D2116916D00A3B572 /* UpcomingViewController.swift in Sources */,
 				5CFDCEA221167FC500FD0751 /* AppDelegate.swift in Sources */,
 				5CF88931211A650700CE0D7B /* EventPopulator.swift in Sources */,
