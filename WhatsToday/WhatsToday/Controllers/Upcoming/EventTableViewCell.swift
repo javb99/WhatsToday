@@ -10,6 +10,19 @@ import UIKit
 
 public class EventTableViewCell: UITableViewCell {
     
+    enum Identifier: String, TableViewCellIdentifier {
+        
+        case standardEvent = "StandardEvent"
+        case closeEvent = "CloseEvent"
+        
+        var nib: UINib {
+            switch self {
+            case .standardEvent:  return UINib(nibName: "EventTableViewCell", bundle: nil)
+            case .closeEvent:  return UINib(nibName: "CloseEventTableViewCell", bundle: nil)
+            }
+        }
+    }
+    
     @IBOutlet public weak var titleLabel: UILabel!
     /// nil, if loaded from CloseEventTableViewCell.nib
     @IBOutlet public weak var dateLabel: UILabel?

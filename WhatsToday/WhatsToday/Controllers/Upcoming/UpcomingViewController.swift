@@ -10,16 +10,8 @@ import UIKit
 
 class UpcomingViewController: UITableViewController, AddEventDelegate {
     
-    struct StoryboardConstants {
-        static let standardEventCellIdentifier = "StandardEvent"
-        static let eventTableViewCellNib = UINib(nibName: "EventTableViewCell", bundle: nil)
-        
-        /// The cells that have are for events that happen today or tomorrow.
-        static let closeEventCellIdentifier = "CloseEvent"
-        /// The nib for cells that have are for events that happen today or tomorrow.
-        static let closeEventTableViewCellNib = UINib(nibName: "CloseEventTableViewCell", bundle: nil)
-        
-        static let showAddEventSegueIdentifier = "ShowAddEvent"
+    enum OutboundSegueIdentifier: String, VCOutgoingSequeIdentifier {
+        case showAddEvent = "ShowAddEvent"
     }
     
     let calendar = Calendar.autoupdatingCurrent
@@ -46,8 +38,8 @@ class UpcomingViewController: UITableViewController, AddEventDelegate {
         tableView.estimatedRowHeight = 60
         
         // Tells the table view to use the nib(compiled xib file) when we ask for a cell with that identifier.
-        tableView.register(StoryboardConstants.eventTableViewCellNib, forCellReuseIdentifier: StoryboardConstants.standardEventCellIdentifier)
-        tableView.register(StoryboardConstants.closeEventTableViewCellNib, forCellReuseIdentifier: StoryboardConstants.closeEventCellIdentifier)
+        tableView.registerCellIdentifierAndNib(EventTableViewCell.Identifier.standardEvent)
+        tableView.registerCellIdentifierAndNib(EventTableViewCell.Identifier.closeEvent)
     }
     
     func refreshUpcomingEvents() {
@@ -68,15 +60,15 @@ class UpcomingViewController: UITableViewController, AddEventDelegate {
         return upcomingReminders.count
     }
     
-    func cellIdentifier(for indexPath: IndexPath, upcomingEvent: Reminder) -> String {
+    func cellIdentifier(for indexPath: IndexPath, upcomingEvent: Reminder) -> EventTableViewCell.Identifier {
         let daysAway = calendar.daysAway(from: upcomingEvent.date)
         
         // If the upcoming event is tomorrow or today, use a different cell.
-        var identifier: String
+        var identifier: EventTableViewCell.Identifier
         if daysAway <= 1 {
-            identifier = StoryboardConstants.closeEventCellIdentifier
+            identifier = .closeEvent
         } else {
-            identifier = StoryboardConstants.standardEventCellIdentifier
+            identifier = .standardEvent
         }
         return identifier
     }
@@ -88,7 +80,7 @@ class UpcomingViewController: UITableViewController, AddEventDelegate {
         let identifier = cellIdentifier(for: indexPath, upcomingEvent: upcomingEvent)
         
         // Ask the tableView for a cell that matches the identifier. And treats it as an EventTableViewCell because we know it always will be.
-        let cell = tableView.dequeueReusableCell(withIdentifier: identifier) as! EventTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier.rawValue) as! EventTableViewCell
         
         eventCellConfigurer.configureCell(cell, using: upcomingEvent)
         
@@ -120,12 +112,14 @@ class UpcomingViewController: UITableViewController, AddEventDelegate {
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segue.identifier {
-        case StoryboardConstants.showAddEventSegueIdentifier:
+        guard let id = segue.identifier, let identifier = OutboundSegueIdentifier(rawValue: id) else {
+            fatalError("Unknown segue identifier: \(segue.identifier ?? "nil")")
+        }
+        
+        switch identifier {
+        case .showAddEvent:
             let controller = segue.destination as! AddEventViewController
             controller.delegate = self
-        default:
-            break
         }
     }
     
