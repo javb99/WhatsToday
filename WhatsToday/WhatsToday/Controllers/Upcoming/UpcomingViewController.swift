@@ -28,6 +28,7 @@ class UpcomingViewController: UITableViewController, AddEventDelegate {
         refreshUpcomingEvents()
         
         configureTableView()
+        configureNavigationItem()
     }
     
     /// Register cell identifiers and do other initial configuration for the tableView. This is currently intended to be called during viewDidLoad.
@@ -42,6 +43,14 @@ class UpcomingViewController: UITableViewController, AddEventDelegate {
         // Tells the table view to use the nib(compiled xib file) when we ask for a cell with that identifier.
         tableView.register(EventTableViewCell.standardEventNib, forCellReuseIdentifier: EventTableViewCell.standardEventIdentifier)
         tableView.register(EventTableViewCell.closeEventNib, forCellReuseIdentifier: EventTableViewCell.closeEventIdentifier)
+    }
+    
+    func configureNavigationItem() {
+        navigationItem.title = "Upcoming"
+        navigationItem.largeTitleDisplayMode = .always
+        
+        let addButton = UIBarButtonItem.init(barButtonSystemItem: .add, target: self, action: #selector(showAddEventViewController(_:)))
+        navigationItem.rightBarButtonItem = addButton
     }
     
     func refreshUpcomingEvents() {
