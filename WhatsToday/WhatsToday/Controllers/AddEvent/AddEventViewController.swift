@@ -24,11 +24,21 @@ class AddEventViewController: UIViewController {
     /// The table view to hold the preview cell.
     var eventPreviewController: EventCellPreviewViewController!
     
+    /// A constraint to make space for the keyboard.
+    var keyboardSpacerConstraint: NSLayoutConstraint?
+    
     /// Will be swapped back and forth with the keyboardConstraint.
     var safeAreaConstraint: NSLayoutConstraint?
     
     /// The delegate is informed of completion and cancelation.
     weak var delegate: AddEventDelegate?
+    
+    
+    /// This will remove the observer when the VC deallocates.
+    private var keyboardWillChangeFrameToken: NotificationToken?
+    
+    /// This will remove the observer when the VC deallocates.
+    private var keyboardWillHideToken: NotificationToken?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +49,7 @@ class AddEventViewController: UIViewController {
         addCellPreviewController()
         addEventInputController()
         setUpConstraints()
+        setupKeyboardObserving()
     }
     
     func configureNavBarItem() {
@@ -74,8 +85,17 @@ class AddEventViewController: UIViewController {
         eventPreviewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
         eventPreviewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
         
+        keyboardSpacerConstraint = eventPreviewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
+        keyboardSpacerConstraint?.identifier = "Keyboard Spacer"
         safeAreaConstraint = eventPreviewController.view.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
+        safeAreaConstraint?.identifier = "Safe Area Constraint"
         safeAreaConstraint?.isActive = true
+    }
+    
+    func setupKeyboardObserving() {
+        let center = NotificationCenter.default
+        keyboardWillChangeFrameToken = center.addObserver(descriptor: KeyboardPayload.willChangeFrame, using: adjustForKeyboard)
+        keyboardWillHideToken = center.addObserver(descriptor: KeyboardPayload.willHide, using: keyboardWillHide)
     }
     
     // MARK: Completion/Cancelation
@@ -103,5 +123,28 @@ extension AddEventViewController: EventInputDelegate {
         // Duplicate currentEvent changing the date.
         let e = eventPreviewController.currentEvent
         eventPreviewController.currentEvent = Event(title: e.title, iconName: e.iconName, date: newDate, lengthType: e.lengthType, reminderFrequency: e.reminderFrequency)
+    }
+}
+
+extension AddEventViewController {
+    
+    func adjustForKeyboard(_ payload: KeyboardPayload) {
+        let newFrame = view.convert(payload.frameEnd, from: view.window)
+        
+        // Apply pending updates before we add ours.
+        view.animateConstraintChanges(withDuration: payload.duration) {
+            self.safeAreaConstraint?.isActive = false
+            // Negative height because iOS coordinates start in the top left.
+            self.keyboardSpacerConstraint?.constant = -newFrame.height
+            self.keyboardSpacerConstraint?.isActive = true
+        }
+    }
+    
+    func keyboardWillHide(_ payload: KeyboardPayload) {
+        // TODO: Adjust the curve to match the payload.
+        view.animateConstraintChanges(withDuration: payload.duration) {
+            self.keyboardSpacerConstraint?.isActive = false
+            self.safeAreaConstraint?.isActive = true
+        }
     }
 }
