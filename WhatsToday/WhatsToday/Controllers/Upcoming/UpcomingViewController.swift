@@ -112,18 +112,15 @@ class UpcomingViewController: UITableViewController, AddEventDelegate {
     
     // MARK: Navigation
     
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let id = segue.identifier, let identifier = OutboundSegueIdentifier(rawValue: id) else {
-            fatalError("Unknown segue identifier: \(segue.identifier ?? "nil")")
-        }
-        
-        switch identifier {
-        case .showAddEvent:
-            let navController = segue.destination as! UINavigationController
-            let controller = navController.childViewControllers.first as! AddEventViewController
-            controller.delegate = self
-        }
+    func createAddEventViewController() -> UIViewController {
+        let addEventVC = AddEventViewController()
+        let navVC = UINavigationController(rootViewController: addEventVC)
+        addEventVC.delegate = self
+        return navVC
+    }
+    
+    @IBAction func showAddEventViewController(_ sender: Any) {
+        present(createAddEventViewController(), animated: true, completion: nil)
     }
     
     // MARK: AddEventViewControllerDelegate implementation.
