@@ -21,24 +21,60 @@ class EventInputTableViewController: UITableViewController {
     /// The date picker in the cell for the date.
     var datePicker: UIDatePicker?
     
+    var dateLabel: UILabel?
+    
+    var date: Date = Date()
+    
     /// The text field in the cell for the title. Set when the table is loaded.
     var titleTextField: UITextField?
+    
+    var isEditingDate: Bool = false {
+        didSet {
+            if oldValue != isEditingDate {
+                tableView.reloadSections([1], with: .automatic)
+                if isEditingDate {
+                    titleTextField?.resignFirstResponder()
+                    
+                    // Scroll the date label and picker to be visible. Doesn't always work yet.
+                    let labelRect = tableView.rectForRow(at: IndexPath(row: 0, section: Section.date.rawValue))
+                    let pickerRect = tableView.rectForRow(at: IndexPath(row: 1, section: Section.date.rawValue))
+                    tableView.scrollRectToVisible(labelRect.union(pickerRect), animated: true)
+                }
+            }
+        }
+    }
+    
+    /// Format: March 3, 2018
+    static let longDateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .long
+        dateFormatter.timeStyle = .none
+        return dateFormatter
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.allowsSelection = false
         tableView.dataSource = self
+        tableView.delegate = self
         
         tableView.register(TextFieldTableViewCell.self, forCellReuseIdentifier: "Title")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Date")
         tableView.register(DatePickerTableViewCell.self, forCellReuseIdentifier: "DatePicker")
     }
     
     // MARK: Actions
     
+    @IBAction func beganEditing(_ sender: UITextField) {
+        isEditingDate = false
+    }
+    
     /// Send when the titleTextField presses the return key.
     @IBAction func finishedEditing(_ sender: UITextField) {
         titleTextField?.resignFirstResponder()
+    }
+    
+    @IBAction func titleChanged(_ sender: UITextField) {
         guard let titleText = titleTextField?.text else { return }
         delegate?.titleChanged(titleText)
     }
@@ -46,7 +82,17 @@ class EventInputTableViewController: UITableViewController {
     /// Send when the datePicker's value changes.
     @IBAction func dateChanged(_ sender: UIDatePicker) {
         guard let date = datePicker?.date else { return }
+        self.date = date
         delegate?.dateChanged(date)
+        dateLabel?.text = EventInputTableViewController.longDateFormatter.string(for: date)
+    }
+    
+    // MARK: TableView Delegate
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 1 && indexPath.row == 0 {
+            isEditingDate = !isEditingDate
+        }
     }
     
     // MARK: TableView Data Source
@@ -61,7 +107,13 @@ class EventInputTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        guard let section = Section(rawValue: section) else { fatalError("Unexpected section index. You probably forgot to add a case to row.") }
+        
+        if section == .date && isEditingDate {
+            return 2
+        } else {
+            return 1
+        }
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection index: Int) -> String? {
@@ -80,13 +132,13 @@ class EventInputTableViewController: UITableViewController {
         case .title:
             return "Title"
         case.date:
-            return "DatePicker"
+            return indexPath.row == 0 ? "Date" : "DatePicker"
         }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let section = Section(rawValue: indexPath.section) else { fatalError("Unexpected section index. You probably forgot to add a case to row.") }
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier(for: indexPath)) else {
+        guard var cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier(for: indexPath)) else {
             fatalError("Could not load nib. Did you make the table view cell the only top level object?")
         }
         
@@ -95,7 +147,16 @@ class EventInputTableViewController: UITableViewController {
             let textFieldCell = cell as! TextFieldTableViewCell
             titleTextField = textFieldCell.textField
             textFieldCell.textField.placeholder = "i.e. Joseph Van Boxtel"
+            titleTextField?.addTarget(self, action: #selector(beganEditing(_:)), for: .editingDidBegin)
+            titleTextField?.addTarget(self, action: #selector(titleChanged(_:)), for: .editingChanged)
             titleTextField?.addTarget(self, action: #selector(finishedEditing(_:)), for: .editingDidEndOnExit)
+            
+        case .date where indexPath.row == 0:
+            cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
+            cell.detailTextLabel?.text = EventInputTableViewController.longDateFormatter.string(for: date)
+            dateLabel = cell.detailTextLabel
+            dateLabel?.textColor = isEditingDate ? ColorAssets.appTint : .darkText
+            datePicker?.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
             
         case .date:
             let datePickerCell = cell as! DatePickerTableViewCell
