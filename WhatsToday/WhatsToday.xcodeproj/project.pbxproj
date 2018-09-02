@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		5C1115E6211F65B700DC1A97 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1115E5211F65B700DC1A97 /* Colors.swift */; };
 		5C8E1DF1212B9BE1008646C6 /* BoxedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8E1DF0212B9BE1008646C6 /* BoxedLabel.swift */; };
-		5CA3B98D2116A243000D17BF /* EventTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CD977262116A00700A3B572 /* EventTableViewCell.xib */; };
 		5CC5C708212664410025D014 /* ViewControllerHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC5C707212664410025D014 /* ViewControllerHelpers.swift */; };
 		5CC5C70D2126A2BD0025D014 /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC5C70B2126A2BD0025D014 /* TextFieldTableViewCell.swift */; };
 		5CC5C710212741EC0025D014 /* IntrinsicTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC5C70F212741EC0025D014 /* IntrinsicTableView.swift */; };
@@ -31,7 +30,6 @@
 		5CFDCEA221167FC500FD0751 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFDCEA121167FC500FD0751 /* AppDelegate.swift */; };
 		5CFDCEA921167FC500FD0751 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CFDCEA821167FC500FD0751 /* Assets.xcassets */; };
 		5CFDCEAC21167FC500FD0751 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CFDCEAA21167FC500FD0751 /* LaunchScreen.storyboard */; };
-		FF0A42AA211A2E3900BD584E /* CloseEventTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF0A42A9211A2E3900BD584E /* CloseEventTableViewCell.xib */; };
 		FF56F76E2117C8B0003364A2 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF56F76D2117C8B0003364A2 /* Event.swift */; };
 /* End PBXBuildFile section */
 
@@ -63,7 +61,6 @@
 		5CD97719211690A200A3B572 /* Event.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Event.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		5CD9771C2116916D00A3B572 /* UpcomingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpcomingViewController.swift; sourceTree = "<group>"; };
 		5CD9772421169FF900A3B572 /* EventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
-		5CD977262116A00700A3B572 /* EventTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventTableViewCell.xib; sourceTree = "<group>"; };
 		5CE53926211CFF330000704C /* EventStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventStorage.swift; sourceTree = "<group>"; };
 		5CED274721249B64008D9960 /* EventCellConfigurer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCellConfigurer.swift; sourceTree = "<group>"; };
 		5CF8892E21190C9500CE0D7B /* CalendarExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarExtensions.swift; sourceTree = "<group>"; };
@@ -77,7 +74,6 @@
 		5CFDCEAD21167FC500FD0751 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5CFDCEB221167FC500FD0751 /* WhatsTodayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WhatsTodayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CFDCEB821167FC500FD0751 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FF0A42A9211A2E3900BD584E /* CloseEventTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CloseEventTableViewCell.xib; sourceTree = "<group>"; };
 		FF56F76D2117C8B0003364A2 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -122,8 +118,6 @@
 			isa = PBXGroup;
 			children = (
 				5CD9771C2116916D00A3B572 /* UpcomingViewController.swift */,
-				5CD977262116A00700A3B572 /* EventTableViewCell.xib */,
-				FF0A42A9211A2E3900BD584E /* CloseEventTableViewCell.xib */,
 				5CD9772421169FF900A3B572 /* EventTableViewCell.swift */,
 				5CED274721249B64008D9960 /* EventCellConfigurer.swift */,
 				5CD9771721168F4800A3B572 /* Upcoming.playground */,
@@ -315,8 +309,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF0A42AA211A2E3900BD584E /* CloseEventTableViewCell.xib in Resources */,
-				5CA3B98D2116A243000D17BF /* EventTableViewCell.xib in Resources */,
 				5CFDCEAC21167FC500FD0751 /* LaunchScreen.storyboard in Resources */,
 				5CFDCEA921167FC500FD0751 /* Assets.xcassets in Resources */,
 			);
