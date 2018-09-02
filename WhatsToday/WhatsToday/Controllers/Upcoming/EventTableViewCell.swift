@@ -8,36 +8,36 @@
 
 import UIKit
 
-class EventTableViewCell: UITableViewCell {
+public class EventTableViewCell: UITableViewCell {
     
-    static let standardEventIdentifier = "StandardEvent"
-    static let closeEventIdentifier = "CloseEvent"
+    public static let standardEventIdentifier = "StandardEvent"
+    public static let closeEventIdentifier = "CloseEvent"
     
-    var style: Style {
+    public var style: Style {
         didSet {
             update(for: style)
         }
     }
     
-    let titleLabel: UILabel
-    let daysLabel: UILabel
-    let lengthLabel: UILabel
-    let iconView: UIImageView
+    public let titleLabel: UILabel
+    public let daysLabel: UILabel
+    public let lengthLabel: UILabel
+    public let iconView: UIImageView
     
-    let dayGroupView: UIView
+    public let dayGroupView: UIView
     
-    let dateLabel: BoxedLabel
-    let daysAwayText: UILabel
+    public let dateLabel: BoxedLabel
+    public let daysAwayText: UILabel
     
-    var standardConstraints: [NSLayoutConstraint] = []
-    var closeConstraints: [NSLayoutConstraint] = []
+    private var standardConstraints: [NSLayoutConstraint] = []
+    private var closeConstraints: [NSLayoutConstraint] = []
     
-    enum Style {
+    public enum Style {
         case standard
         case close
     }
     
-    init() {
+    public init() {
         self.style = .standard
         
         titleLabel = UILabel(frame: .zero)
@@ -57,15 +57,15 @@ class EventTableViewCell: UITableViewCell {
         update(for: style)
     }
     
-    override convenience init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    public override convenience init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         self.init()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func addSubviews() {
+    private func addSubviews() {
         contentView.addSubview(titleLabel)
         contentView.addSubview(lengthLabel)
         contentView.addSubview(iconView)
@@ -76,7 +76,7 @@ class EventTableViewCell: UITableViewCell {
         contentView.addSubview(dayGroupView)
     }
     
-    func setupSubviews() {
+    private func setupSubviews() {
         iconView.contentMode = .scaleAspectFit
         
         titleLabel.font = UIFont.preferredFont(forTextStyle: .headline)
@@ -97,7 +97,7 @@ class EventTableViewCell: UITableViewCell {
         dateLabel.textAlignment = .center
     }
     
-    func setupConstraints() {
+    private func setupConstraints() {
         UIView.disableAutoresizingMaskConstraints(views: contentView.subviews)
         UIView.disableAutoresizingMaskConstraints(views: dayGroupView.subviews)
         
@@ -171,7 +171,7 @@ class EventTableViewCell: UITableViewCell {
         ]
     }
     
-    func update(for style: Style) {
+    public func update(for style: Style) {
         switch style {
         case .standard:
             // Hide the "Days Away" text.

@@ -8,16 +8,16 @@
 
 import UIKit
 
-class BoxedLabel: UIView {
+public class BoxedLabel: UIView {
     
     private let textLabel: UILabel
     
-    var insets: UIEdgeInsets
+    public private(set) var insets: UIEdgeInsets
     
     // MARK: Passed on properties
     
     /// The radius to use when drawing rounded corners for the background. Animatable.
-    var cornerRadius: CGFloat {
+    public var cornerRadius: CGFloat {
         get {
             return layer.cornerRadius
         }
@@ -27,7 +27,7 @@ class BoxedLabel: UIView {
     }
     
     /// The current text that is displayed by the label.
-    var text: String? {
+    public var text: String? {
         get {
             return textLabel.text
         }
@@ -37,7 +37,7 @@ class BoxedLabel: UIView {
     }
     
     /// The current styled text that is displayed by the label.
-    var attributedText: NSAttributedString? {
+    public var attributedText: NSAttributedString? {
         get {
             return textLabel.attributedText
         }
@@ -47,7 +47,7 @@ class BoxedLabel: UIView {
     }
     
     /// The color of the text.
-    var textColor: UIColor {
+    public var textColor: UIColor {
         get {
             return textLabel.textColor
         }
@@ -57,7 +57,7 @@ class BoxedLabel: UIView {
     }
     
     /// The technique to use for aligning the text.
-    var textAlignment: NSTextAlignment {
+    public var textAlignment: NSTextAlignment {
         get {
             return textLabel.textAlignment
         }
@@ -67,7 +67,7 @@ class BoxedLabel: UIView {
     }
     
     /// The technique to use for wrapping and truncating the label’s text.
-    var lineBreakMode: NSLineBreakMode {
+    public var lineBreakMode: NSLineBreakMode {
         get {
             return textLabel.lineBreakMode
         }
@@ -77,7 +77,7 @@ class BoxedLabel: UIView {
     }
     
     /// The font used to display the text.
-    var font: UIFont {
+    public var font: UIFont {
         get {
             return textLabel.font
         }
@@ -87,7 +87,7 @@ class BoxedLabel: UIView {
     }
     
     
-    init(insets: UIEdgeInsets = .zero, cornerRadius: CGFloat = 8, backgroundColor: UIColor = .blue) {
+    public init(insets: UIEdgeInsets = .zero, cornerRadius: CGFloat = 8, backgroundColor: UIColor = .blue) {
         textLabel = UILabel(frame: .zero)
         self.insets = insets
         
@@ -102,11 +102,11 @@ class BoxedLabel: UIView {
         setupConstraints()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupConstraints() {
+    public func setupConstraints() {
         textLabel.translatesAutoresizingMaskIntoConstraints = false
         textLabel.constrainFillSuperview(insets)
     }
