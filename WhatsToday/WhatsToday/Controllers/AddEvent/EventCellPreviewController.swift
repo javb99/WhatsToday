@@ -47,10 +47,7 @@ class EventCellPreviewViewController: UITableViewController {
     }
     
     func configurePreviewCell() {
-        let nib = EventTableViewCell.standardEventNib
-        guard let previewCell = nib.instantiate(withOwner: nil, options: nil).first as? EventTableViewCell else {
-            fatalError("Failed to load the nib. You must have changed something critical.")
-        }
+        let previewCell = EventTableViewCell()
         
         self.previewCell = previewCell
     }
@@ -58,5 +55,7 @@ class EventCellPreviewViewController: UITableViewController {
     func refreshPreviewCell() {
         guard let previewCell = previewCell else { return }
         cellConfigurer.configureCell(previewCell, using: currentEvent.nextReminder(using: cellConfigurer.calender))
+        tableView.beginUpdates()
+        tableView.endUpdates()
     }
 }

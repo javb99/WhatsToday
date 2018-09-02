@@ -59,7 +59,7 @@ struct EventCellConfigurer {
         let daysAway = calender.daysAway(from: upcomingEvent.date)
         
         // Sets the image on the left of the cell. For example, the gift box.
-        cell.typeIconView.image = UIImage(named: upcomingEvent.originalEvent.iconName)
+        cell.iconView.image = UIImage(named: upcomingEvent.originalEvent.iconName)
         
         // Sets the title. For birthdays it will probably be a name.
         cell.titleLabel.text = upcomingEvent.originalEvent.title
@@ -71,19 +71,25 @@ struct EventCellConfigurer {
         // Color relevant elements
         let rowColor = color(forDaysAway: daysAway)
         cell.daysLabel.textColor = rowColor
-        cell.typeIconView.tintColor = rowColor
-        cell.dateBackgroundView?.backgroundColor = rowColor
-        cell.daysAwayText?.textColor = rowColor
+        cell.iconView.tintColor = rowColor
+        cell.dateLabel.backgroundColor = rowColor
+        cell.daysAwayText.textColor = rowColor
         
         // Set the date label to a formatted date.
-        cell.dateLabel?.text = EventCellConfigurer.monthAndDayFormatter.string(from: upcomingEvent.date)
+        cell.dateLabel.text = EventCellConfigurer.monthAndDayFormatter.string(from: upcomingEvent.date)
         
         // Set the days away label.
         var daysText: String
         switch daysAway {
-            case 0: daysText = "Today"
-            case 1: daysText = "Tomorrow"
-            default: daysText = String(daysAway)
+            case 0:
+                daysText = "Today"
+                cell.style = .close
+            case 1:
+                daysText = "Tomorrow"
+                cell.style = .close
+            default:
+                daysText = String(daysAway)
+                cell.style = .standard
         }
         cell.daysLabel.text = daysText
     }

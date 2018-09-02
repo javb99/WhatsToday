@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5C1115E6211F65B700DC1A97 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1115E5211F65B700DC1A97 /* Colors.swift */; };
+		5C8E1DF1212B9BE1008646C6 /* BoxedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8E1DF0212B9BE1008646C6 /* BoxedLabel.swift */; };
 		5CA3B98D2116A243000D17BF /* EventTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CD977262116A00700A3B572 /* EventTableViewCell.xib */; };
 		5CC5C708212664410025D014 /* ViewControllerHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC5C707212664410025D014 /* ViewControllerHelpers.swift */; };
 		5CC5C70D2126A2BD0025D014 /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC5C70B2126A2BD0025D014 /* TextFieldTableViewCell.swift */; };
@@ -46,6 +47,8 @@
 
 /* Begin PBXFileReference section */
 		5C1115E5211F65B700DC1A97 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		5C8E1DF0212B9BE1008646C6 /* BoxedLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxedLabel.swift; sourceTree = "<group>"; };
+		5CAD2AA82127F71000D403C5 /* EventCell.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = EventCell.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		5CC5C707212664410025D014 /* ViewControllerHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerHelpers.swift; sourceTree = "<group>"; };
 		5CC5C70B2126A2BD0025D014 /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		5CC5C70F212741EC0025D014 /* IntrinsicTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntrinsicTableView.swift; sourceTree = "<group>"; };
@@ -99,6 +102,7 @@
 		5CC5C715212775FA0025D014 /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				5CAD2AA82127F71000D403C5 /* EventCell.playground */,
 				5CC5C70B2126A2BD0025D014 /* TextFieldTableViewCell.swift */,
 				5CC5C71321276B6A0025D014 /* DatePickerTableViewCell.swift */,
 			);
@@ -213,6 +217,7 @@
 				5CC5C715212775FA0025D014 /* TableViewCells */,
 				5CC5C70F212741EC0025D014 /* IntrinsicTableView.swift */,
 				5CC5C71F2127B9820025D014 /* UIViewExtensions.swift */,
+				5C8E1DF0212B9BE1008646C6 /* BoxedLabel.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -344,6 +349,7 @@
 				5CC5C71E2127B3A00025D014 /* KeyboardNotifications.swift in Sources */,
 				5CD9772521169FF900A3B572 /* EventTableViewCell.swift in Sources */,
 				5CE53927211CFF330000704C /* EventStorage.swift in Sources */,
+				5C8E1DF1212B9BE1008646C6 /* BoxedLabel.swift in Sources */,
 				5CED274821249B64008D9960 /* EventCellConfigurer.swift in Sources */,
 				5CC5C71B2127AE160025D014 /* Notification.swift in Sources */,
 				5CD9771D2116916D00A3B572 /* UpcomingViewController.swift in Sources */,

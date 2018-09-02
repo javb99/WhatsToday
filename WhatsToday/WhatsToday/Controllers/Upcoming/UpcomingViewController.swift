@@ -40,9 +40,8 @@ class UpcomingViewController: UITableViewController, AddEventDelegate {
         // Currently this is the height in the xib. TODO: Adjust this based on dynamic text size.
         tableView.estimatedRowHeight = 60
         
-        // Tells the table view to use the nib(compiled xib file) when we ask for a cell with that identifier.
-        tableView.register(EventTableViewCell.standardEventNib, forCellReuseIdentifier: EventTableViewCell.standardEventIdentifier)
-        tableView.register(EventTableViewCell.closeEventNib, forCellReuseIdentifier: EventTableViewCell.closeEventIdentifier)
+        // Tells the table view to use the class initializer when we ask for a cell with that identifier.
+        tableView.register(EventTableViewCell.self, forCellReuseIdentifier: EventTableViewCell.standardEventIdentifier)
     }
     
     func configureNavigationItem() {
@@ -71,24 +70,11 @@ class UpcomingViewController: UITableViewController, AddEventDelegate {
         return upcomingReminders.count
     }
     
-    func cellIdentifier(for indexPath: IndexPath, upcomingEvent: Reminder) -> String {
-        let daysAway = calendar.daysAway(from: upcomingEvent.date)
-        
-        // If the upcoming event is tomorrow or today, use a different cell.
-        var identifier: String
-        if daysAway <= 1 {
-            identifier = EventTableViewCell.closeEventIdentifier
-        } else {
-            identifier = EventTableViewCell.standardEventIdentifier
-        }
-        return identifier
-    }
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let upcomingEvent = upcomingReminders[indexPath.row]
         
-        let identifier = cellIdentifier(for: indexPath, upcomingEvent: upcomingEvent)
+        let identifier = EventTableViewCell.standardEventIdentifier
         
         // Ask the tableView for a cell that matches the identifier. And treats it as an EventTableViewCell because we know it always will be.
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier) as! EventTableViewCell

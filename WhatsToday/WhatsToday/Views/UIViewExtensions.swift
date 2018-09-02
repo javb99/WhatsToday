@@ -26,3 +26,33 @@ extension UIView {
         animateConstraintChanges(withDuration: duration, delay: 0, options: [], changes: changes, completion: nil)
     }
 }
+
+extension UIView {
+    
+    /// Sets the `translatesAutoresizingMaskIntoConstraints` property to `false` on all the views.
+    static func disableAutoresizingMaskConstraints(views: [UIView]) {
+        for view in views {
+            view.translatesAutoresizingMaskIntoConstraints = false
+        }
+    }
+    
+    /// Adds constraints between the receiver and it's superview to fill it leaving a margin defined by `insets`. The constraints are activated.
+    ///
+    /// - Parameter insets: The leading constraint uses the `left` value of the insets and the trailing constraint uses the `right` value of the insets.
+    /// - Returns: The constraints that were activated.
+    @discardableResult
+    func constrainFillSuperview(_ insets: UIEdgeInsets = .zero) -> [NSLayoutConstraint] {
+        guard let superview = superview else {
+            preconditionFailure("superview must not be nil.")
+        }
+        
+        let top = self.topAnchor.constraint(equalTo: superview.topAnchor, constant: insets.top)
+        let bottom = self.bottomAnchor.constraint(equalTo: superview.bottomAnchor, constant: -insets.bottom)
+        let leading = self.leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: insets.left)
+        let trailing = self.trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -insets.right)
+        
+        let constraints = [top, bottom, leading, trailing]
+        NSLayoutConstraint.activate(constraints)
+        return constraints
+    }
+}
