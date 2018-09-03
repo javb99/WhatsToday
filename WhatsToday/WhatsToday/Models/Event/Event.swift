@@ -8,38 +8,38 @@
 
 import Foundation
 
-enum LengthType: Int, Codable {
+public enum LengthType: Int, Codable {
     /// Years old
     case age
     /// Years
     case period
 }
 
-enum ReminderFrequency: Int, Codable {
+public enum ReminderFrequency: Int, Codable {
     case yearly
     case monthly
 }
 
-struct Event: Codable {
-    let title: String
-    var iconName: String
-    let date: Date
-    var lengthType: LengthType
-    var reminderFrequency: ReminderFrequency
+public struct Event: Codable, Equatable {
+    public let title: String
+    public var iconName: String
+    public let date: Date
+    public var lengthType: LengthType
+    public var reminderFrequency: ReminderFrequency
 }
 
-extension Event: Equatable {
+public extension Event {
     
     /// Two Event values are considered equal if their title and date are equal.
-    static func ==(_ lhs: Event, _ rhs: Event) -> Bool {
+    public static func ==(_ lhs: Event, _ rhs: Event) -> Bool {
         return lhs.title == rhs.title && lhs.date == rhs.date
     }
 }
 
-extension Event {
+public extension Event {
     
     /// Find the next reminder event today or later.
-    func nextReminder(using calendar: Calendar) -> Reminder {
+    public func nextReminder(using calendar: Calendar) -> Reminder {
         // Currently, the code is very similar between the cases, but once we add the third case they won't be quite as similar.
         switch reminderFrequency {
         case .yearly:

@@ -8,29 +8,29 @@
 
 import UIKit
 
-class EventCellPreviewViewController: UITableViewController {
+public class EventCellPreviewViewController: UITableViewController {
     
     /// The cell to use for the preview.
-    var previewCell: EventTableViewCell!
+    public private(set) var previewCell: EventTableViewCell!
     
     /// The CellConfigurer responsible for configuring the previewCell.
-    let cellConfigurer = EventCellConfigurer()
+    public let cellConfigurer = EventCellConfigurer()
     
     /// Needed to keep a strong reference to the data source.
-    var previewDataSource: ArrayDataSource!
+    public var previewDataSource: ArrayDataSource!
     
-    var currentEvent: Event = EventPopulator().createRandomEvents(count: 1).first! {
+    public var currentEvent: Event = EventPopulator().createRandomEvents(count: 1).first! {
         didSet {
             refreshPreviewCell()
         }
     }
     
-    override func loadView() {
+    public override func loadView() {
         tableView = IntrinsicTableView(frame: .zero, style: .plain)
         view = tableView
     }
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         
         configurePreviewCell()
@@ -46,13 +46,13 @@ class EventCellPreviewViewController: UITableViewController {
         refreshPreviewCell()
     }
     
-    func configurePreviewCell() {
+    private func configurePreviewCell() {
         let previewCell = EventTableViewCell()
         
         self.previewCell = previewCell
     }
     
-    func refreshPreviewCell() {
+    public func refreshPreviewCell() {
         guard let previewCell = previewCell else { return }
         cellConfigurer.configureCell(previewCell, using: currentEvent.nextReminder(using: cellConfigurer.calender))
         tableView.beginUpdates()

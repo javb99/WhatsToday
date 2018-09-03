@@ -8,9 +8,9 @@
 
 import Foundation
 
-extension URL {
+public extension URL {
     /// The documentDirectory in the userDomainMask.
-    static var appDocumentsURL: URL {
+    public static var appDocumentsURL: URL {
         guard let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
             fatalError("Could not find the documents directory.")
         }
@@ -19,16 +19,16 @@ extension URL {
 }
 
 /// A class to manage the reading and writing of events to disk.
-class EventStorage {
+public class EventStorage {
     
     /// The singleton instance. This is the only instance that can exist because the init is private.
-    static let shared = EventStorage()
+    public static let shared = EventStorage()
     
     /// The URL to store the events at.
-    static let storageURL = URL.appDocumentsURL.appendingPathComponent("EventStorage_Events.json")
+    internal static let storageURL = URL.appDocumentsURL.appendingPathComponent("EventStorage_Events.json")
     
     // We don't want anyone changing events without using one of the methods defined below. This gives us the option of saving every time an Event is added or deleted.
-    private(set) var events: [Event]
+    public private(set) var events: [Event]
     
     // Private init to prevent more than one instance to be initialized.
     private init() {
@@ -41,7 +41,7 @@ class EventStorage {
         }
     }
     
-    func save() {
+    public func save() {
         print("Saving events to \(EventStorage.storageURL.absoluteString)")
         do {
             let eventsData = try JSONEncoder().encode(events)
@@ -55,11 +55,11 @@ class EventStorage {
         save()
     }
     
-    func add(_ event: Event) {
+    public func add(_ event: Event) {
         events.append(event)
     }
     
-    func remove(_ event: Event) {
+    public func remove(_ event: Event) {
         /// Find the given event.
         guard let index = events.index(of: event) else {
             preconditionFailure("Event passed in to remove(_:) doesn't exist in events.")
@@ -67,7 +67,7 @@ class EventStorage {
         remove(at: index)
     }
     
-    func remove(at index: Int) {
+    public func remove(at index: Int) {
         events.remove(at: index)
     }
 }

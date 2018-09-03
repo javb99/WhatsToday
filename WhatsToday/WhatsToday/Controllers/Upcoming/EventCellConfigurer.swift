@@ -22,20 +22,22 @@ private func ithEquidistantValue(i: Int, within range: ClosedRange<CGFloat>, cou
 }
 
 /// A structure to manage the configuration of EventTableViewCells.
-struct EventCellConfigurer {
+public struct EventCellConfigurer {
+    
+    public init() {}
     
     /// Format: Mar 3
-    static let monthAndDayFormatter: DateFormatter = {
+    private static let monthAndDayFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.setLocalizedDateFormatFromTemplate("MMM d")
         return dateFormatter
     }()
     
     /// The calendar to use for calcuations. Defaults to Calendar.autoupdatingCurrent.
-    let calender = Calendar.autoupdatingCurrent
+    public let calender = Calendar.autoupdatingCurrent
     
     /// The tint color for the given number of days away.
-    func color(forDaysAway daysAway: Int) -> UIColor {
+    public func color(forDaysAway daysAway: Int) -> UIColor {
         let appTintColor = ColorAssets.appTint
         
         var dayPercent: CGFloat
@@ -55,11 +57,11 @@ struct EventCellConfigurer {
     }
     
     /// Configures the given cell for the givent event.
-    func configureCell(_ cell: EventTableViewCell, using upcomingEvent: Reminder) {
+    public func configureCell(_ cell: EventTableViewCell, using upcomingEvent: Reminder) {
         let daysAway = calender.daysAway(from: upcomingEvent.date)
         
         // Sets the image on the left of the cell. For example, the gift box.
-        cell.iconView.image = UIImage(named: upcomingEvent.originalEvent.iconName)
+        cell.iconView.image = UIImage(named: upcomingEvent.originalEvent.iconName, in: Bundle(for: EventTableViewCell.self), compatibleWith: nil)
         
         // Sets the title. For birthdays it will probably be a name.
         cell.titleLabel.text = upcomingEvent.originalEvent.title

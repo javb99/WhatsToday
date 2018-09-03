@@ -13,21 +13,23 @@ private func randomNumber(lessThan upperbound: Int) -> Int {
 }
 
 /// A type to facilitate creation of test Event values.
-struct EventPopulator {
+public struct EventPopulator {
     
-    var titles = ["William", "Joe", "Khrystyna", "Sam", "Abbie"]
-    func randomTitle() -> String {
+    public init() {}
+    
+    private var titles = ["William", "Joe", "Khrystyna", "Sam", "Abbie"]
+    public func randomTitle() -> String {
         let index = randomNumber(lessThan: titles.count)
         return titles[index]
     }
     
-    var iconNames = ["giftBox"]
-    func randomIconName() -> String {
+    private var iconNames = ["giftBox"]
+    public func randomIconName() -> String {
         let index = randomNumber(lessThan: iconNames.count)
         return iconNames[index]
     }
     
-    func randomBirthdate() -> Date {
+    public func randomBirthdate() -> Date {
         let calendar = Calendar.autoupdatingCurrent
         // Pick a random year between 1950 and 2010.
         let year = randomNumber(lessThan: 60) + 1950
@@ -47,7 +49,7 @@ struct EventPopulator {
     }
     
     /// Create `count` Event values
-    func createRandomEvents(count: Int) -> [Event] {
+    public func createRandomEvents(count: Int) -> [Event] {
         return (0..<count).map { _ in Event(title: randomTitle(), iconName: randomIconName(), date: randomBirthdate(), lengthType: .age, reminderFrequency: .yearly) }
     }
 }

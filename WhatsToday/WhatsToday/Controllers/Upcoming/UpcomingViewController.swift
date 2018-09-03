@@ -8,20 +8,20 @@
 
 import UIKit
 
-class UpcomingViewController: UITableViewController, AddEventDelegate {
+public class UpcomingViewController: UITableViewController, AddEventDelegate {
     
-    enum OutboundSegueIdentifier: String, VCOutgoingSequeIdentifier {
+    public enum OutboundSegueIdentifier: String, VCOutgoingSequeIdentifier {
         case showAddEvent = "ShowAddEvent"
     }
     
-    let calendar = Calendar.autoupdatingCurrent
+    public let calendar = Calendar.autoupdatingCurrent
     
-    let eventCellConfigurer = EventCellConfigurer()
+    public let eventCellConfigurer = EventCellConfigurer()
     
     // The upcoming reminder of the event.
-    var upcomingReminders: [Reminder] = []
+    public private(set) var upcomingReminders: [Reminder] = []
 
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         
         // Create reminder events.
@@ -32,7 +32,7 @@ class UpcomingViewController: UITableViewController, AddEventDelegate {
     }
     
     /// Register cell identifiers and do other initial configuration for the tableView. This is currently intended to be called during viewDidLoad.
-    func configureTableView() {
+    private func configureTableView() {
         tableView.allowsSelection = false
         
         // Set up dynamic sized rows.
@@ -44,7 +44,7 @@ class UpcomingViewController: UITableViewController, AddEventDelegate {
         tableView.register(EventTableViewCell.self, forCellReuseIdentifier: EventTableViewCell.standardEventIdentifier)
     }
     
-    func configureNavigationItem() {
+    private func configureNavigationItem() {
         navigationItem.title = "Upcoming"
         navigationItem.largeTitleDisplayMode = .always
         
@@ -52,7 +52,7 @@ class UpcomingViewController: UITableViewController, AddEventDelegate {
         navigationItem.rightBarButtonItem = addButton
     }
     
-    func refreshUpcomingEvents() {
+    public func refreshUpcomingEvents() {
         // Find the next reminder for all the events in EventStorage.
         upcomingReminders = EventStorage.shared.events.map { $0.nextReminder(using: self.calendar) }
         
@@ -62,15 +62,15 @@ class UpcomingViewController: UITableViewController, AddEventDelegate {
     
     // MARK: Data Source
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    public override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return upcomingReminders.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let upcomingEvent = upcomingReminders[indexPath.row]
         
@@ -86,11 +86,11 @@ class UpcomingViewController: UITableViewController, AddEventDelegate {
     
     // MARK: TableViewDelegate
     
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    public override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    public override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         switch editingStyle {
         case .delete:
             // The reminder at this row.
@@ -120,7 +120,7 @@ class UpcomingViewController: UITableViewController, AddEventDelegate {
     
     // MARK: AddEventViewControllerDelegate implementation.
     
-    func addEventViewControllerCompleted(_ controller: AddEventViewController, with event: Event) {
+    public func addEventViewControllerCompleted(_ controller: AddEventViewController, with event: Event) {
         // Add the Event to storage.
         EventStorage.shared.add(event)
         
@@ -132,7 +132,7 @@ class UpcomingViewController: UITableViewController, AddEventDelegate {
         dismiss(animated: true, completion: nil)
     }
     
-    func addEventViewControllerCanceled(_ controller: AddEventViewController) {
+    public func addEventViewControllerCanceled(_ controller: AddEventViewController) {
         dismiss(animated: true, completion: nil)
     }
 }

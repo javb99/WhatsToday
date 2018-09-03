@@ -8,36 +8,36 @@
 
 import UIKit
 
-class ArrayDataSource: NSObject, UITableViewDataSource {
+public class ArrayDataSource: NSObject, UITableViewDataSource {
     
-    var sections: [[UITableViewCell]]
+    public var sections: [[UITableViewCell]]
     
-    var headerTitles: [String?]?
-    var footerTitles: [String?]?
+    public var headerTitles: [String?]?
+    public var footerTitles: [String?]?
     
-    init(sections: [[UITableViewCell]], headerTitles: [String?]? = nil, footerTitles: [String?]? = nil) {
+    public init(sections: [[UITableViewCell]], headerTitles: [String?]? = nil, footerTitles: [String?]? = nil) {
         self.sections = sections
         self.headerTitles = headerTitles
         self.footerTitles = footerTitles
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
+    public func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sections[section].count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return sections[indexPath.section][indexPath.row]
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return headerTitles?[section]
     }
     
-    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+    public func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         return footerTitles?[section]
     }
 }

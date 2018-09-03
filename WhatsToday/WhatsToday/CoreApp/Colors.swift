@@ -9,7 +9,7 @@
 import UIKit
 
 struct ColorAssets {
-    static let appTint = UIColor(named: "appTint")!
+    static let appTint = UIColor(named: "appTint", in: Bundle(for: AppDelegate.self), compatibleWith: nil)!
 }
 
 extension UIColor {

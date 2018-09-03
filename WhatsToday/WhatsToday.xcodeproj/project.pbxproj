@@ -13,6 +13,26 @@
 		5C13DEF9213B78B900A06F5A /* BoxedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8E1DF0212B9BE1008646C6 /* BoxedLabel.swift */; };
 		5C13DEFA213B78BD00A06F5A /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC5C71F2127B9820025D014 /* UIViewExtensions.swift */; };
 		5C13DEFB213B89B000A06F5A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CFDCEA821167FC500FD0751 /* Assets.xcassets */; };
+		5C13DEFC213C867000A06F5A /* EventCellConfigurer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CED274721249B64008D9960 /* EventCellConfigurer.swift */; };
+		5C13DEFD213C86B800A06F5A /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1115E5211F65B700DC1A97 /* Colors.swift */; };
+		5C13DEFE213C875D00A06F5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFDCEA121167FC500FD0751 /* AppDelegate.swift */; };
+		5C13DEFF213C87AA00A06F5A /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF88932211A6CB000CE0D7B /* Reminder.swift */; };
+		5C13DF00213C87B000A06F5A /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF56F76D2117C8B0003364A2 /* Event.swift */; };
+		5C13DF01213C87E200A06F5A /* CalendarExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF8892E21190C9500CE0D7B /* CalendarExtensions.swift */; };
+		5C13DF02213C89E900A06F5A /* Assets.xcassets in Sources */ = {isa = PBXBuildFile; fileRef = 5CFDCEA821167FC500FD0751 /* Assets.xcassets */; };
+		5C13DF03213C89E900A06F5A /* EventStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE53926211CFF330000704C /* EventStorage.swift */; };
+		5C13DF04213C89E900A06F5A /* ViewControllerHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC5C707212664410025D014 /* ViewControllerHelpers.swift */; };
+		5C13DF05213C89E900A06F5A /* UpcomingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD9771C2116916D00A3B572 /* UpcomingViewController.swift */; };
+		5C13DF06213CA31F00A06F5A /* ArrayTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC5C711212743A80025D014 /* ArrayTableViewDataSource.swift */; };
+		5C13DF07213CA31F00A06F5A /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC5C71A2127AE160025D014 /* Notification.swift */; };
+		5C13DF08213CA31F00A06F5A /* KeyboardNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC5C71D2127B3A00025D014 /* KeyboardNotifications.swift */; };
+		5C13DF09213CA31F00A06F5A /* AddEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF88935211A8EE500CE0D7B /* AddEventViewController.swift */; };
+		5C13DF0A213CA31F00A06F5A /* EventInputTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC5C71621277A880025D014 /* EventInputTableViewController.swift */; };
+		5C13DF0B213CA31F00A06F5A /* EventCellPreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC5C71821277FB70025D014 /* EventCellPreviewController.swift */; };
+		5C13DF0C213CA31F00A06F5A /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC5C70B2126A2BD0025D014 /* TextFieldTableViewCell.swift */; };
+		5C13DF0D213CA31F00A06F5A /* DatePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC5C71321276B6A0025D014 /* DatePickerTableViewCell.swift */; };
+		5C13DF0E213CA31F00A06F5A /* IntrinsicTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC5C70F212741EC0025D014 /* IntrinsicTableView.swift */; };
+		5C6C4345213CAFAA00AB8C11 /* EventPopulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF88930211A650700CE0D7B /* EventPopulator.swift */; };
 		5C8E1DF1212B9BE1008646C6 /* BoxedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8E1DF0212B9BE1008646C6 /* BoxedLabel.swift */; };
 		5CC5C708212664410025D014 /* ViewControllerHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC5C707212664410025D014 /* ViewControllerHelpers.swift */; };
 		5CC5C70D2126A2BD0025D014 /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC5C70B2126A2BD0025D014 /* TextFieldTableViewCell.swift */; };
@@ -64,7 +84,6 @@
 		5CC5C71A2127AE160025D014 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		5CC5C71D2127B3A00025D014 /* KeyboardNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardNotifications.swift; sourceTree = "<group>"; };
 		5CC5C71F2127B9820025D014 /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
-		5CD9771721168F4800A3B572 /* Upcoming.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Upcoming.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		5CD97719211690A200A3B572 /* Event.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Event.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		5CD9771C2116916D00A3B572 /* UpcomingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpcomingViewController.swift; sourceTree = "<group>"; };
 		5CD9772421169FF900A3B572 /* EventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
@@ -142,7 +161,6 @@
 				5CD9771C2116916D00A3B572 /* UpcomingViewController.swift */,
 				5CD9772421169FF900A3B572 /* EventTableViewCell.swift */,
 				5CED274721249B64008D9960 /* EventCellConfigurer.swift */,
-				5CD9771721168F4800A3B572 /* Upcoming.playground */,
 			);
 			path = Upcoming;
 			sourceTree = "<group>";
@@ -393,8 +411,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C6C4345213CAFAA00AB8C11 /* EventPopulator.swift in Sources */,
+				5C13DF06213CA31F00A06F5A /* ArrayTableViewDataSource.swift in Sources */,
+				5C13DF07213CA31F00A06F5A /* Notification.swift in Sources */,
+				5C13DF08213CA31F00A06F5A /* KeyboardNotifications.swift in Sources */,
+				5C13DF09213CA31F00A06F5A /* AddEventViewController.swift in Sources */,
+				5C13DF0A213CA31F00A06F5A /* EventInputTableViewController.swift in Sources */,
+				5C13DF0B213CA31F00A06F5A /* EventCellPreviewController.swift in Sources */,
+				5C13DF0C213CA31F00A06F5A /* TextFieldTableViewCell.swift in Sources */,
+				5C13DF0D213CA31F00A06F5A /* DatePickerTableViewCell.swift in Sources */,
+				5C13DF0E213CA31F00A06F5A /* IntrinsicTableView.swift in Sources */,
+				5C13DF02213C89E900A06F5A /* Assets.xcassets in Sources */,
+				5C13DF03213C89E900A06F5A /* EventStorage.swift in Sources */,
+				5C13DF04213C89E900A06F5A /* ViewControllerHelpers.swift in Sources */,
+				5C13DF05213C89E900A06F5A /* UpcomingViewController.swift in Sources */,
+				5C13DF00213C87B000A06F5A /* Event.swift in Sources */,
+				5C13DEFE213C875D00A06F5A /* AppDelegate.swift in Sources */,
+				5C13DEFF213C87AA00A06F5A /* Reminder.swift in Sources */,
 				5C13DEF8213B78A400A06F5A /* EventTableViewCell.swift in Sources */,
+				5C13DF01213C87E200A06F5A /* CalendarExtensions.swift in Sources */,
+				5C13DEFD213C86B800A06F5A /* Colors.swift in Sources */,
 				5C13DEFA213B78BD00A06F5A /* UIViewExtensions.swift in Sources */,
+				5C13DEFC213C867000A06F5A /* EventCellConfigurer.swift in Sources */,
 				5C13DEF9213B78B900A06F5A /* BoxedLabel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

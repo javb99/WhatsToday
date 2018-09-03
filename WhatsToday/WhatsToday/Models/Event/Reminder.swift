@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Reminder {
-    var originalEvent: Event
-    var date: Date
+public struct Reminder {
+    public var originalEvent: Event
+    public var date: Date
 }
