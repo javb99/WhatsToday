@@ -10,14 +10,9 @@ import Foundation
 
 public extension Calendar {
     
-    /// Trims off any components that aren't contained in `components`.
-    public func date(keeping components: Set<Calendar.Component>, of date: Date) -> Date {
-        return self.date(from: dateComponents(components, from: date))!
-    }
-    
     /// Today trimmed to only contain year, month, and day.
     public var today: Date {
-        return date(keeping: [.year, .month, .day], of: Date())
+        return startOfDay(for: Date())
     }
     
     /// The number of days from today til the given date.
@@ -25,19 +20,25 @@ public extension Calendar {
         return daysBetween(today, date)
     }
     
-    /// The number of days from `start` to `end`. It is common to use dates that have the smaller units removed.
+    /// The number of days from `start` to `end`. Ignores units smaller than day.
     public func daysBetween(_ start: Date, _ end: Date) -> Int {
-        return dateComponents([.day], from: start, to: end).day!
+        let startDay = startOfDay(for: start)
+        let endDay = startOfDay(for: end)
+        return dateComponents([.day], from: startDay, to: endDay).day!
     }
     
-    /// The number of years from `start` to `end`. It is common to use dates that have the smaller units removed.
+    /// The number of years from `start` to `end`. Ignores units smaller than day.
     public func yearsBetween(_ start: Date, _ end: Date) -> Int {
-        return dateComponents([.year], from: start, to: end).year!
+        let startDay = startOfDay(for: start)
+        let endDay = startOfDay(for: end)
+        return dateComponents([.year], from: startDay, to: endDay).year!
     }
     
-    /// The number of years and remainder months from `start` to `end`. It is common to use dates that have the smaller units removed.
+    /// The number of years and remainder months from `start` to `end`. Ignores units smaller than day.
     public func yearsAndMonthsBetween(_ start: Date, _ end: Date) -> (years: Int, months: Int) {
-        let components = dateComponents([.year, .month], from: start, to: end)
+        let startDay = startOfDay(for: start)
+        let endDay = startOfDay(for: end)
+        let components = dateComponents([.year, .month], from: startDay, to: endDay)
         return (years: components.year!, months: components.month!)
     }
     

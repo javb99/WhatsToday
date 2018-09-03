@@ -46,6 +46,7 @@
 		5CD9771D2116916D00A3B572 /* UpcomingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD9771C2116916D00A3B572 /* UpcomingViewController.swift */; };
 		5CD9772521169FF900A3B572 /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD9772421169FF900A3B572 /* EventTableViewCell.swift */; };
 		5CE53927211CFF330000704C /* EventStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE53926211CFF330000704C /* EventStorage.swift */; };
+		5CE72D0D213DDCA80050FC5F /* CalendarCalculations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE72D0C213DDCA80050FC5F /* CalendarCalculations.swift */; };
 		5CED274821249B64008D9960 /* EventCellConfigurer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CED274721249B64008D9960 /* EventCellConfigurer.swift */; };
 		5CF8892F21190C9500CE0D7B /* CalendarExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF8892E21190C9500CE0D7B /* CalendarExtensions.swift */; };
 		5CF88931211A650700CE0D7B /* EventPopulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF88930211A650700CE0D7B /* EventPopulator.swift */; };
@@ -87,6 +88,7 @@
 		5CD9771C2116916D00A3B572 /* UpcomingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpcomingViewController.swift; sourceTree = "<group>"; };
 		5CD9772421169FF900A3B572 /* EventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		5CE53926211CFF330000704C /* EventStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventStorage.swift; sourceTree = "<group>"; };
+		5CE72D0C213DDCA80050FC5F /* CalendarCalculations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCalculations.swift; sourceTree = "<group>"; };
 		5CED274721249B64008D9960 /* EventCellConfigurer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCellConfigurer.swift; sourceTree = "<group>"; };
 		5CF8892E21190C9500CE0D7B /* CalendarExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarExtensions.swift; sourceTree = "<group>"; };
 		5CF88930211A650700CE0D7B /* EventPopulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPopulator.swift; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 			isa = PBXGroup;
 			children = (
 				5CFDCEB821167FC500FD0751 /* Info.plist */,
+				5CE72D0C213DDCA80050FC5F /* CalendarCalculations.swift */,
 			);
 			path = WhatsTodayTests;
 			sourceTree = "<group>";
@@ -354,6 +357,7 @@
 					};
 					5CFDCEB121167FC500FD0751 = {
 						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1000;
 						TestTargetID = 5CFDCE9D21167FC400FD0751;
 					};
 				};
@@ -468,6 +472,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CE72D0D213DDCA80050FC5F /* CalendarCalculations.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -709,6 +714,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = WhatsTodayTests/Info.plist;
@@ -720,6 +726,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = josephvb.WhatsTodayTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WhatsToday.app/WhatsToday";
@@ -731,6 +738,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = WhatsTodayTests/Info.plist;
