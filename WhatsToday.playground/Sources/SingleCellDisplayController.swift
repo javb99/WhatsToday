@@ -15,7 +15,7 @@ public class SingleCellDisplayController : UITableViewController {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 56
     }
     

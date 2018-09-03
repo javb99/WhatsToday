@@ -4,5 +4,6 @@
         <page name='EventCell'/>
         <page name='CellGradient'/>
         <page name='Upcoming'/>
+        <page name='Add'/>
     </pages>
 </playground>

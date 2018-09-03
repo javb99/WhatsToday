@@ -12,7 +12,6 @@
 		5C13DEF8213B78A400A06F5A /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD9772421169FF900A3B572 /* EventTableViewCell.swift */; };
 		5C13DEF9213B78B900A06F5A /* BoxedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8E1DF0212B9BE1008646C6 /* BoxedLabel.swift */; };
 		5C13DEFA213B78BD00A06F5A /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC5C71F2127B9820025D014 /* UIViewExtensions.swift */; };
-		5C13DEFB213B89B000A06F5A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CFDCEA821167FC500FD0751 /* Assets.xcassets */; };
 		5C13DEFC213C867000A06F5A /* EventCellConfigurer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CED274721249B64008D9960 /* EventCellConfigurer.swift */; };
 		5C13DEFD213C86B800A06F5A /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1115E5211F65B700DC1A97 /* Colors.swift */; };
 		5C13DEFE213C875D00A06F5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFDCEA121167FC500FD0751 /* AppDelegate.swift */; };
@@ -384,7 +383,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5C13DEFB213B89B000A06F5A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
