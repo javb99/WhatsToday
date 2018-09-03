@@ -47,6 +47,7 @@
 		5CD9772521169FF900A3B572 /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD9772421169FF900A3B572 /* EventTableViewCell.swift */; };
 		5CE53927211CFF330000704C /* EventStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE53926211CFF330000704C /* EventStorage.swift */; };
 		5CE72D0D213DDCA80050FC5F /* CalendarCalculations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE72D0C213DDCA80050FC5F /* CalendarCalculations.swift */; };
+		5CE72D0F213DE7940050FC5F /* EventCellConfigurerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE72D0E213DE7940050FC5F /* EventCellConfigurerTests.swift */; };
 		5CED274821249B64008D9960 /* EventCellConfigurer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CED274721249B64008D9960 /* EventCellConfigurer.swift */; };
 		5CF8892F21190C9500CE0D7B /* CalendarExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF8892E21190C9500CE0D7B /* CalendarExtensions.swift */; };
 		5CF88931211A650700CE0D7B /* EventPopulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF88930211A650700CE0D7B /* EventPopulator.swift */; };
@@ -89,6 +90,7 @@
 		5CD9772421169FF900A3B572 /* EventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		5CE53926211CFF330000704C /* EventStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventStorage.swift; sourceTree = "<group>"; };
 		5CE72D0C213DDCA80050FC5F /* CalendarCalculations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCalculations.swift; sourceTree = "<group>"; };
+		5CE72D0E213DE7940050FC5F /* EventCellConfigurerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCellConfigurerTests.swift; sourceTree = "<group>"; };
 		5CED274721249B64008D9960 /* EventCellConfigurer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCellConfigurer.swift; sourceTree = "<group>"; };
 		5CF8892E21190C9500CE0D7B /* CalendarExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarExtensions.swift; sourceTree = "<group>"; };
 		5CF88930211A650700CE0D7B /* EventPopulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPopulator.swift; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 			children = (
 				5CFDCEB821167FC500FD0751 /* Info.plist */,
 				5CE72D0C213DDCA80050FC5F /* CalendarCalculations.swift */,
+				5CE72D0E213DE7940050FC5F /* EventCellConfigurerTests.swift */,
 			);
 			path = WhatsTodayTests;
 			sourceTree = "<group>";
@@ -472,6 +475,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CE72D0F213DE7940050FC5F /* EventCellConfigurerTests.swift in Sources */,
 				5CE72D0D213DDCA80050FC5F /* CalendarCalculations.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -33,6 +33,13 @@ public struct EventCellConfigurer {
         return dateFormatter
     }()
     
+    /// Adds the appropriate "st", "rd", "th" suffix.
+    private static let ordinalNumberFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .ordinal
+        return formatter
+    }()
+    
     /// The calendar to use for calcuations. Defaults to Calendar.autoupdatingCurrent.
     public let calender = Calendar.autoupdatingCurrent
     
@@ -68,7 +75,8 @@ public struct EventCellConfigurer {
         
         // Set the subtitle.
         let yearsOld = calender.yearsBetween(upcomingEvent.originalEvent.date, upcomingEvent.date)
-        cell.lengthLabel.text = "\(yearsOld) years old"
+        
+        cell.lengthLabel.text = EventCellConfigurer.ordinalNumberFormatter.string(from: NSNumber(value: yearsOld))! + " birthday"
         
         // Color relevant elements
         let rowColor = color(forDaysAway: daysAway)
