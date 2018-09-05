@@ -59,6 +59,10 @@ public class EventStorage {
         events.append(event)
     }
     
+    public func add<S: Sequence>(contentsOf sequence: S) -> Void where S.Element == Event {
+        events.append(contentsOf: sequence)
+    }
+    
     public func remove(_ event: Event) {
         /// Find the given event.
         guard let index = events.index(of: event) else {

@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import Contacts
+import ContactsUI
 
-public class UpcomingViewController: UITableViewController, AddEventDelegate {
+public class UpcomingViewController: UITableViewController, AddEventDelegate, CNContactPickerDelegate {
     
     public enum OutboundSegueIdentifier: String, VCOutgoingSequeIdentifier {
         case showAddEvent = "ShowAddEvent"
@@ -29,6 +31,7 @@ public class UpcomingViewController: UITableViewController, AddEventDelegate {
         
         configureTableView()
         configureNavigationItem()
+        configureToobarItems()
     }
     
     /// Register cell identifiers and do other initial configuration for the tableView. This is currently intended to be called during viewDidLoad.
@@ -47,9 +50,16 @@ public class UpcomingViewController: UITableViewController, AddEventDelegate {
     private func configureNavigationItem() {
         navigationItem.title = "Upcoming"
         navigationItem.largeTitleDisplayMode = .always
+    }
+    
+    private func configureToobarItems() {
+        let importContactsButton = UIBarButtonItem(title: "Import", style: .plain, target: self, action: #selector(showImportScreen))
         
-        let addButton = UIBarButtonItem.init(barButtonSystemItem: .add, target: self, action: #selector(showAddEventViewController(_:)))
-        navigationItem.rightBarButtonItem = addButton
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        
+        let createButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showAddEventViewController(_:)))
+        
+        toolbarItems = [importContactsButton, flexibleSpace, createButton]
     }
     
     public func refreshUpcomingEvents() {
@@ -135,4 +145,32 @@ public class UpcomingViewController: UITableViewController, AddEventDelegate {
     public func addEventViewControllerCanceled(_ controller: AddEventViewController) {
         dismiss(animated: true, completion: nil)
     }
+    
+    // MARK: Contacts import.
+    
+    @IBAction public func showImportScreen() {
+        let contactPickerController = CNContactPickerViewController()
+        contactPickerController.predicateForEnablingContact = CNContact.predicateForHavingABirthday
+        contactPickerController.predicateForSelectionOfContact = CNContact.predicateForHavingABirthday
+        contactPickerController.delegate = self
+        present(contactPickerController, animated: true, completion: nil)
+    }
+    
+    public func contactPickerDidCancel(_ picker: CNContactPickerViewController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    public func contactPicker(_ picker: CNContactPickerViewController, didSelect contacts: [CNContact]) {
+        // Create and store birthday events for each of the selected contacts.
+        EventStorage.shared.add(contentsOf: contacts.compactMap(Event.init))
+        
+        refreshUpcomingEvents()
+        tableView.reloadData()
+        
+        dismiss(animated: true, completion: nil)
+    }
+}
+
+extension CNContact {
+    public static let predicateForHavingABirthday: NSPredicate = NSPredicate(format: "birthday != nil")
 }

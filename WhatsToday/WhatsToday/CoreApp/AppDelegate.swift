@@ -26,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let upcomingVC = UpcomingViewController()
         let navigationVC = UINavigationController(rootViewController: upcomingVC)
         navigationVC.navigationBar.prefersLargeTitles = true
+        navigationVC.setToolbarHidden(false, animated: false)
         return navigationVC
     }
     

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Contacts
 
 public enum LengthType: Int, Codable {
     /// Years old
@@ -54,5 +55,31 @@ public extension Event {
             let reminderDate = calendar.nextDateAtOr(after: today, matching: day)!
             return Reminder(originalEvent: self, date: reminderDate)
         }
+    }
+}
+
+extension CNContactFormatter {
+    public static let `default` = CNContactFormatter()
+}
+
+public extension Event {
+    
+    init?(birthdayFor contact: CNContact) {
+        // TODO: The use should probably be informed of failures.
+        guard let name = CNContactFormatter.default.string(from: contact) else {
+            print("Failed to format name for contact.")
+            return nil
+        }
+        guard let birthdayComps = contact.birthday, let birthday = Calendar.current.date(from: birthdayComps) else {
+            print("Failed to get birthdate from contact.")
+            return nil
+        }
+        guard birthdayComps.year != nil else {
+            print("Birthday did not have a year. We can't handle this yet.")
+            return nil
+            // TODO: Handle this case.
+        }
+        
+        self.init(title: name, iconName: "giftBox", date: birthday, lengthType: .age, reminderFrequency: .yearly)
     }
 }
